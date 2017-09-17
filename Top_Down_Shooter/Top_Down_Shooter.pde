@@ -24,6 +24,7 @@ void setup() {
 }
 
 void draw() {
+  imageMode(CORNER);
   image(ground, 0, 0);
 
   pushMatrix();
@@ -40,17 +41,20 @@ void draw() {
       angle++;
     }
   }
+  imageMode(CENTER);
   if (shooted==true) {
     pos=pos+10;
     image(bullet, pos, 0);
-    
+
     float x = modelX(pos, 0, 0);
     float y = modelY(pos, 0, 0);
-    if (xTarget==x && yTarget==y) {
-      xTarget = int(random(300, 930));
+    if (dist(xTarget, yTarget, x, y)<=100) {
+      xTarget = int(random(900, 930));
       yTarget = int(random(600));
+      pos=0;
+      shooted=false;
     }
-    
+
     if (pos==800) {
       shooted=false;
       pos=0;

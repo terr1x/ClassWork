@@ -9,6 +9,9 @@ SoundFile sound;
 int angle = 90;
 int pos = 0;
 int xTarget = int(random(300, 930));
+int yTarget = int(random(600));
+
+
 Boolean shooted=false;
 
 void setup() {

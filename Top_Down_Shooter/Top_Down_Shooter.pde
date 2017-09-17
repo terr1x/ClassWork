@@ -3,10 +3,12 @@ import processing.sound.SoundFile;
 PImage kek;
 PImage ground;
 PImage bullet;
+PImage target;
 SoundFile sound;
 
 int angle = 90;
 int pos = 0;
+int xTarget = int(random(300, 930));
 Boolean shooted=false;
 
 void setup() {
@@ -15,6 +17,7 @@ void setup() {
   kek = loadImage("кек.png");
   ground = loadImage("ground.png");
   bullet = loadImage("кек лол арбидол.png");
+  target = loadImage("бэлка.png");
 }
 
 void draw() {
@@ -37,17 +40,27 @@ void draw() {
   if (shooted==true) {
     pos=pos+10;
     image(bullet, pos, 0);
+    
+    float x = modelX(pos, 0, 0);
+    float y = modelY(pos, 0, 0);
+    if (xTarget==x && yTarget==y) {
+      xTarget = int(random(300, 930));
+      yTarget = int(random(600));
+    }
+    
     if (pos==800) {
       shooted=false;
       pos=0;
     }
   }
   popMatrix();
+  translate(xTarget, yTarget);
+  scale(-0.5, 0.5);
+  image(target, 0, 0);
 }
 
 void keyReleased() { 
   if (key==' ') {
-    
     shooted=true;
     sound.play();
     pos=0;

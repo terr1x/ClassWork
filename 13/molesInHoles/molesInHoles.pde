@@ -1,17 +1,20 @@
 void setup() {
   size(400, 400);
   background(52, 168, 83); // трава
+  
   fill(0, 0, 0);
   ellipse(200, 200, 100, 30); // норы!
   ellipse(70, 119, 100, 30);
   ellipse(300, 60, 100, 30);
   ellipse(297, 350, 100, 30);
+  
+  drawMole(300, 60); //рисуем кротов
+  drawMole(200, 200);
+  drawMole(70, 119);
+  drawMole(297, 350);
 }
 
-void drawMole() {
-  int moleX = 248;
-  int moleY = 185;
-
+void drawMole(int moleX, int moleY) { //команда ,которая отрисовывает крота в определённых координатах
   noStroke();
   fill(125, 93, 43);
   ellipse(moleX, moleY, 60, 60); // морда

@@ -8,8 +8,8 @@ SoundFile sound;
 
 int angle = 90;
 int pos = 0;
-int xTarget = int(random(300, 930));
-int yTarget = int(random(600));
+int xTarget = 0;
+int yTarget = 0;
 
 
 Boolean shooted=false;
@@ -21,6 +21,7 @@ void setup() {
   ground = loadImage("ground.png");
   bullet = loadImage("кек лол арбидол.png");
   target = loadImage("бэлка.png");
+  spawnTarget();
 }
 
 void draw() {
@@ -41,25 +42,12 @@ void draw() {
       angle++;
     }
   }
+
   imageMode(CENTER);
   if (shooted==true) {
-    pos=pos+10;
-    image(bullet, pos, 0);
-
-    float x = modelX(pos, 0, 0);
-    float y = modelY(pos, 0, 0);
-    if (dist(xTarget, yTarget, x, y)<=100) {
-      xTarget = int(random(900, 930));
-      yTarget = int(random(600));
-      pos=0;
-      shooted=false;
-    }
-
-    if (pos==800) {
-      shooted=false;
-      pos=0;
-    }
+    shot();
   }
+
   popMatrix();
   translate(xTarget, yTarget);
   scale(-0.5, 0.5);
@@ -71,5 +59,31 @@ void keyReleased() {
     shooted=true;
     sound.play();
     pos=0;
+  }
+}
+
+void resetBullet() {
+  shooted=false;
+  pos=0;
+}
+
+void spawnTarget() {
+  xTarget = int(random(900, 930));
+  yTarget = int(random(600));
+}
+
+void shot() {
+  pos=pos+10;
+  image(bullet, pos, 0);
+
+  float x = modelX(pos, 0, 0);
+  float y = modelY(pos, 0, 0);
+  if (dist(xTarget, yTarget, x, y)<=100) {
+    spawnTarget();
+    resetBullet();
+  }
+
+  if (pos==800) {
+    resetBullet();
   }
 }

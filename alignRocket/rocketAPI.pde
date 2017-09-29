@@ -28,10 +28,10 @@ void drawRocket() {
 
   // иллюминаторы
   addBigWindow();
-  addCenterSmallWindow();
-  addSecondCenterSmallWindow();
-  addRightSmallWindow();
-  addLeftSmallWindow();
+  addSmallWindow(10, 65);
+  addSmallWindow(50, 70);
+  addSmallWindow(50, 50);
+  addSmallWindow(90, 65);
 }
 
 void drawBigWindow() {
@@ -50,37 +50,16 @@ void moveRocket() {
   alpha++;
 }
 
-void addLeftSmallWindow() {
-  pushMatrix();
-  translate(10, 65);
-  drawSmallWindow();
-  popMatrix();
-}
-
-void addRightSmallWindow() {
-  pushMatrix();
-  translate(50, 70);
-  drawSmallWindow();
-  popMatrix();
-}
-
-void addSecondCenterSmallWindow() {
-  pushMatrix();
-  translate(50, 50);
-  drawSmallWindow();
-  popMatrix();
-}
-
-void addCenterSmallWindow() {
-  pushMatrix();
-  translate(90, 65);
-  drawSmallWindow();
-  popMatrix();
-}
-
 void addBigWindow() {
   pushMatrix();
   translate(50, 25);
   drawBigWindow();
+  popMatrix();
+}
+
+void addSmallWindow(int x, int y) {
+  pushMatrix();
+  translate(x, y);
+  drawSmallWindow();
   popMatrix();
 }

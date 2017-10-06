@@ -1,11 +1,13 @@
 PImage sheet;
 
 void setup() {
-  size(400, 400);
+  size(1800, 920);
   smooth(0);
   sheet = loadImage("cats.png");
-  
-  drawCat();
+
+  for (int i = 0; i < 30; i++) {
+    drawCat();
+  }
 }
 
 void drawCat() {

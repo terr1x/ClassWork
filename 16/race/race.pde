@@ -1,4 +1,5 @@
-int carX = 350;
+int[] speeds = {1,2,3,4,5};
+int[] carXes = {120, 190, 260, 330, 400};
 PImage car;
 
 void setup() {
@@ -8,20 +9,24 @@ void setup() {
 
 void draw() {
   background(30);
-  
+
   handleMotionKeys();
-  
-  for(int i = 0; i < 5; i++){
-    image(car, carX, 100 + i * 40);
+
+  for (int i = 0; i < 5; i++) {
+    image(car, carXes[i], 100 + i * 40);
   }
 }
 
-void handleMotionKeys(){
+void handleMotionKeys() {
   if (keyPressed) {
     if (key == 'a') {
-      carX -= 2;
+      for (int i = 0; i < 5; i++) {
+        carXes[i] -= speeds[i];
+      }
     } else if (key == 'd') {
-      carX += 2;
+      for (int i = 0; i < 5; i++) {
+        carXes[i] += speeds[i];
+      }
     }
   }
 }

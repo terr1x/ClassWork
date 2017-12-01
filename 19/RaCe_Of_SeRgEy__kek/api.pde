@@ -8,7 +8,7 @@ void drawCar(int x, int y) {
 }
 
 void game() {
-  if (isMouseClicked) {
+  if (isTouched) {
     if (mouseX<width/2) {
       moveLeft();
     } else {
@@ -64,15 +64,26 @@ void game() {
 }
 
 void gameOver() {
-  if (isMouseClicked == true) {
-    state = GAME;
-  }
   background(#C7C96C);
   fill(#030000);
   textSize(40);
   text("Lol GAMEOVER", 50, 450);
   speedOfMyCar=0;
   speedOfZloCar=0;
+
+  if (isTouched) {
+    restart();
+  }
+}
+
+void restart() {
+  x=200;
+  for (int i=0; i<3; i++) {
+    ys[i]=ysReset[i];
+  }
+  speedOfMyCar=7; 
+  speedOfZloCar=9;
+  state = GAME;
 }
 
 void checkDistance(int firstCar, int secondCar, int thirdCar) {

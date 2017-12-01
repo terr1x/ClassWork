@@ -16,7 +16,7 @@ String GAME = "game";
 String GAME_OVER = "gameover";
 String state = GAME;
 
-boolean isMouseClicked = false;
+boolean isTouched = false;
 
 void setup() {
   size(400, 900, P2D);
@@ -32,24 +32,16 @@ void draw() {
   } else if (state == GAME) {
     game();
   }
+  isTouched = false;
 }
 
 void mousePressed() {
-  isMouseClicked = true;
-}
-
-void mouseReleased() {
-  isMouseClicked = false;
+  isTouched = true;
 }
 
 void keyPressed() {
   if (key=='r') {
-    for (int i=0; i<3; i++) {
-      ys[i]=ysReset[i];
-    }
-    speedOfMyCar=7; 
-    speedOfZloCar=9;
-    state = GAME;
+    restart();
   }
   if (key=='a') {
     moveLeft();

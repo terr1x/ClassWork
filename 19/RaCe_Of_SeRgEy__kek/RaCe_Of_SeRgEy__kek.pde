@@ -3,6 +3,8 @@ PImage zloCar;
 int[] ys={int(random(-500, 0)), int(random(-500, 0)), int(random(-500, 0))};
 int[] lines = {100, 300, 500, 700, 900};
 int[] zloCars = {65, 200, 335};
+int speedOfMyCar=7; //скорость моей машинки
+int speedOfZloCar=9; //скорость злой машинки
 int y=770;
 int x=200;
 
@@ -29,7 +31,7 @@ void draw() {
     if (lines[i]>=900) {
       lines[i]=-100;
     }
-    lines[i]=lines[i]+7;
+    lines[i]=lines[i]+speedOfMyCar;
   }
 
   drawCar(x, y);
@@ -52,9 +54,12 @@ void draw() {
         checkDistance(2, 0, 1);
       }
     }
-    ys[i]=ys[i]+9;
+    ys[i]=ys[i]+speedOfZloCar;
+    }
+ 
+  for (int i=0; i<3; i++) {
     if (abs(ys[i]-y)<=2400*0.098 && x==zloCars[i]) {
-      println("game over");
+      gameOver();
     }
   }
 }
@@ -62,9 +67,16 @@ void draw() {
 
 
 
-void keyPressed() {  
+void keyPressed() {
+  if (key=='r') {
+    for (int i=0; i<3; i++) {
+      ys[i]=int(random(-500, 0));
+    }
+    speedOfMyCar=7; 
+    speedOfZloCar=9;
+  }
   if (key=='a') {
-    x=x-135;
+    x=x-135; 
     if (x<65) {
       x=65;
     }

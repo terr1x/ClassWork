@@ -12,6 +12,9 @@ int speedOfZloCar=9; //скорость злой машинки
 int y=770;
 int x=200;
 
+final float scale = 0.098;
+final float carSize = 2400 * scale;
+
 String GAME = "game";
 String GAME_OVER = "gameover";
 String state = GAME;

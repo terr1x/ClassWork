@@ -1,7 +1,7 @@
 void drawCar(int x, int y) {
   pushMatrix();
   translate(x, y);
-  scale(0.098);
+  scale(scale);
   rotate(radians(-90));
   image(car, 0, 0);
   popMatrix();
@@ -38,11 +38,11 @@ void game() {
   for (int i=0; i<3; i++) {
     pushMatrix();
     translate(zloCars[i], ys[i]);
-    scale(0.098);
+    scale(scale);
     image(zloCar, 0, 0);
     popMatrix();
     if (ys[i]>=1000) {
-      ys[i]=int(random(-1000, 0));
+      ys[i]=int(random(-1000, -150));
       if (i==0) {
         checkDistance(0, 1, 2);
       }
@@ -57,7 +57,7 @@ void game() {
   }
 
   for (int i=0; i<3; i++) {
-    if (abs(ys[i]-y)<=2400*0.098 && x==zloCars[i]) {
+    if (abs(ys[i]-y)<=carSize && x==zloCars[i]) {
       state = GAME_OVER;
     }
   }
@@ -87,9 +87,24 @@ void restart() {
 }
 
 void checkDistance(int firstCar, int secondCar, int thirdCar) {
-  if (abs(ys[firstCar]-ys[secondCar])<=352 && abs(ys[firstCar]-ys[thirdCar])<=352) {
-    ys[firstCar]=ys[firstCar]-800;
+  int up;
+  int down;
+  if (ys[secondCar]<ys[thirdCar]) {
+    up=ys[secondCar];
+    down=ys[thirdCar];
+  } else {
+    up=ys[thirdCar];
+    down=ys[secondCar];
   }
+  
+  if (ys[firstCar]>down+carSize*2.5) {
+    return;
+  }
+  if (ys[firstCar]<up-carSize*2.5) {
+    return;
+  }
+  
+  ys[firstCar]=(int)(up-carSize*2.5);
 }
 
 void moveLeft() {

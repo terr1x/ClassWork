@@ -8,7 +8,7 @@ void drawCar(int x, int y) {
 }
 
 void game() {
-  if (isTouched) {
+  if (isTouched) {  //
     if (mouseX<width/2) {
       moveLeft();
     } else {
@@ -17,46 +17,20 @@ void game() {
   }
 
   background(#766050);
-  for (int i=133; i<267; i=i+133) {
+  for (int i=133; i<267; i=i+133) {  //
     stroke(0);
     strokeWeight(8);
     line(i, 0, i, 900);
   }
 
-  for (int i=0; i<=4; i++) {
-    noStroke();
-    fill(#766050);
-    rect(0, lines[i], 400, 100);
-    if (lines[i]>=900) {
-      lines[i]=-100;
-    }
-    lines[i]=lines[i]+speedOfMyCar;
-  }
+  myCar();  //
+
+  zloCar();
 
   drawCar(x, y);
 
-  for (int i=0; i<3; i++) {
-    pushMatrix();
-    translate(zloCars[i], ys[i]);
-    scale(scale);
-    image(zloCar, 0, 0);
-    popMatrix();
-    if (ys[i]>=1000) {
-      ys[i]=int(random(-1000, -150));
-      if (i==0) {
-        checkDistance(0, 1, 2);
-      }
-      if (i==1) {
-        checkDistance(1, 0, 2);
-      }
-      if (i==2) {
-        checkDistance(2, 0, 1);
-      }
-    }
-    ys[i]=ys[i]+speedOfZloCar;
-  }
 
-  for (int i=0; i<3; i++) {
+  for (int i=0; i<3; i++) {  //
     if (abs(ys[i]-y)<=carSize && x==zloCars[i]) {
       state = GAME_OVER;
     }
@@ -96,14 +70,14 @@ void checkDistance(int firstCar, int secondCar, int thirdCar) {
     up=ys[thirdCar];
     down=ys[secondCar];
   }
-  
+
   if (ys[firstCar]>down+carSize*2.5) {
     return;
   }
   if (ys[firstCar]<up-carSize*2.5) {
     return;
   }
-  
+
   ys[firstCar]=(int)(up-carSize*2.5);
 }
 
@@ -118,5 +92,40 @@ void moveRight() {
   x=x+135;
   if (x>335) {
     x=335;
+  }
+}
+
+void zloCar() {
+  for (int i=0; i<3; i++) {
+    pushMatrix();  //
+    translate(zloCars[i], ys[i]);
+    scale(scale);
+    image(zloCar, 0, 0);
+    popMatrix();
+    if (ys[i]>=1000) {  //
+      ys[i]=int(random(-1000, -150));
+      if (i==0) {
+        checkDistance(0, 1, 2);
+      }
+      if (i==1) {
+        checkDistance(1, 0, 2);
+      }
+      if (i==2) {
+        checkDistance(2, 0, 1);
+      }
+    }
+    ys[i]=ys[i]+speedOfZloCar;
+  }
+}
+
+void myCar() {
+  for (int i=0; i<=4; i++) {
+    noStroke();
+    fill(#766050);
+    rect(0, lines[i], 400, 100);
+    if (lines[i]>=900) {
+      lines[i]=-100;
+    }
+    lines[i]=lines[i]+speedOfMyCar;
   }
 }

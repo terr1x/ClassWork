@@ -39,12 +39,7 @@ void draw() {
   } else if (state == GAME) {
     game();
   }
-  text("Score 0",40,40);
   isTouched = false;
-  faster=faster+1;
-  if(faster==1000){
-   speedOfZloCar=speedOfZloCar+1; 
-  }
 } //<>//
 
 void mousePressed() {

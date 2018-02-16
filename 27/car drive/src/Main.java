@@ -1,20 +1,19 @@
 import processing.core.PApplet;
 
 public class Main extends PApplet {
-    Car[] cars = new Car[5];
+    Car[] cars = new Car[20];
 
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
 
     public void settings() {
-        size(200, 200);
+        size(500, 500);
     }
 
     public void setup() {
-        for (int i = 0; i < cars.length; i++){
-            cars[i] = new Car(0, random(0, 200), 100, 2);
-        }
+        for (int i = 0; i < cars.length; i++)
+            cars[i] = new Car( color(random(0, 255), random(0, 255),random(0,255)), random(0, 200), random(0, 500), random(1, 4));
 
     }
 

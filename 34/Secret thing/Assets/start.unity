@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f03102d2e17233b4cab949c065dfb59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secretThing: {fileID: 1758777400}
 --- !u!1 &871821272
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,6 +431,10 @@ Prefab:
 --- !u!1 &1758777399 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 363eadd7b0296344ea940d7a31979145, type: 3}
+  m_PrefabInternal: {fileID: 369119178}
+--- !u!4 &1758777400 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400002, guid: 363eadd7b0296344ea940d7a31979145, type: 3}
   m_PrefabInternal: {fileID: 369119178}
 --- !u!65 &1758777403
 BoxCollider:

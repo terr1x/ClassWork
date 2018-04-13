@@ -4,6 +4,8 @@ public class Main extends PApplet {
 
     int score = 0;
 
+    int time = 0;
+
     String right = "right";
     String left = "left";
     String forward = "forward";
@@ -14,9 +16,9 @@ public class Main extends PApplet {
 
     String screen = GAME;
 
-    Puckman puckman = new Puckman(250, 250, 1, right);
-
-    Fish fish = new Fish((int) random(10, width - 10), (int) random(10, width - 10));
+    Puckman puckman;
+    Fish fish;
+    Speeder speeder;
 
     public static void main(String[] args) {
         PApplet.main(Main.class);
@@ -24,9 +26,17 @@ public class Main extends PApplet {
 
     public void settings() {
         size(500, 500);
+
+        puckman = new Puckman(250, 250, 1, right);
+
+        fish = new Fish((int) random(10, width - 10), (int) random(10, width - 10));
+
+        speeder = new Speeder((int) random(10, width - 10), (int) random(10, width - 10));
     }
 
     public void draw() {
+        time = time + 1;
+
         if (screen == GAME) {
             game();
         } else if (screen == GAME_OVER) {
@@ -43,9 +53,15 @@ public class Main extends PApplet {
 
         puckman.draw();
         puckman.move();
-        puckman.collision();
+        puckman.collisionOfFood();
+        puckman.collisionOfSpeeder();
 
         fish.draw();
+
+        speeder.actionOfSpeeder();
+        if (time > 1000) {
+            speeder.draw();
+        }
 
         if (keyPressed) {
             if (key == 'd') {
@@ -85,6 +101,8 @@ public class Main extends PApplet {
     void restart() {
         screen = GAME;
         puckman.reset();
+        score = 0;
+        puckman.speed = 1;
     }
 
     public class Puckman {
@@ -106,7 +124,7 @@ public class Main extends PApplet {
         }
 
         void draw() {
-            fill(69,200,252);
+            fill(69, 200, 252);
             ellipse(x, y, size, size);
         }
 
@@ -125,10 +143,18 @@ public class Main extends PApplet {
             }
         }
 
-        void collision() {
-            if (fish.x > x - size / 2 && fish.x < x + size / 2 && fish.y > y - size / 2 && fish.y < y + size / 2) {
+        void collisionOfFood() {
+            if (fish.x + fish.size / 2 > x - size / 2 && fish.x - fish.size / 2 < x + size / 2 && fish.y + fish.size / 2 > y - size / 2 && fish.y - fish.size / 2 < y + size / 2) {
                 fish.reset();
                 score = score + 1;
+            }
+        }
+
+        void collisionOfSpeeder() {
+            if (speeder.x > x - size / 2 && speeder.x < x + size / 2 && speeder.y > y - size / 2 && speeder.y < y + size / 2) {
+                puckman.speed = 2;
+                speeder.reset();
+                time = 0;
             }
         }
 
@@ -149,13 +175,40 @@ public class Main extends PApplet {
         }
 
         void draw() {
-            fill(221,220,141);
+            fill(221, 220, 141);
             ellipse(x, y, size, size);
         }
 
         void reset() {
             fish.x = (int) random(10, width - 10);
             fish.y = (int) random(10, height - 10);
+        }
+    }
+
+    public class Speeder {
+        int x;
+        int y;
+        int size = 15;
+
+        Speeder(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        void draw() {
+            fill(14, 239, 18);
+            ellipse(x, y, size, size);
+        }
+
+        void reset() {
+            x = (int) random(10, width - 10);
+            y = (int) random(10, height - 10);
+        }
+
+        void actionOfSpeeder() {
+            if (time > 500) {
+                puckman.speed = 1;
+            }
         }
     }
 }

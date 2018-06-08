@@ -31,9 +31,21 @@ public class World {
 
     KillerMLG killerMLG;
 
-    World(PApplet p, KillerMLG killerMLG) {
+    ArrayList<Bullet> bullets;
+
+    ArrayList<Bot> bots;
+
+    ArrayList<Character> characters;
+
+    World(PApplet p) {
         parent = p;
-        this.killerMLG = killerMLG;
+        this.killerMLG = new KillerMLG(50, 50, "soldier.png", parent);
+        this.bullets = new ArrayList<>();
+        this.bots = new ArrayList<>();
+        this.characters = new ArrayList<>();
+        characters.add(killerMLG);
+        bots.add(new Bot(400, 200, "enemy.png", parent));
+        characters.addAll(bots);
         background = parent.loadImage("background.png");
         tiles[0] = parent.loadImage("Прозрачный тайл.png");
         tiles[1] = parent.loadImage("ground.png");
@@ -58,29 +70,55 @@ public class World {
             }
         }
         applyCollision();
+
+        killerMLG.draw();
+        for (Character character : characters) {
+            character.update();
+        }
+        for (int i = 0; i < bots.size(); i++) {
+            bots.get(i).draw();
+        }
+
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).draw();
+            bullets.get(i).move();
+        }
     }
 
     void applyCollision() {
-        killerMLG.onGround = false;
+        killBots();
+
+        for (int i = 0; i < characters.size(); i++) {
+            characters.get(i).onGround = false;
+        }
         for (int i = 0; i < grounds.size(); i++) {
-            Tile tile = grounds.get(i);
-            if (killerMLG.x + killerMLG.width / 2 > tile.x && killerMLG.x - killerMLG.width / 2 < tile.x + tile.size && killerMLG.y + killerMLG.height / 2 > tile.y && killerMLG.y - killerMLG.height / 2 < tile.y + tile.size) {
-                if (killerMLG.y < tile.y) {
-                    killerMLG.onGround = true;
-                    killerMLG.y=tile.y-killerMLG.height/2;
-                    killerMLG.speed *= -.1f;
+            for (int j = 0; j < characters.size(); j++) {
+                Tile tile = grounds.get(i);
+                if (characters.get(j).x + characters.get(j).width / 2 > tile.x && characters.get(j).x - characters.get(j).width / 2 < tile.x + tile.size && characters.get(j).y + characters.get(j).height / 2 > tile.y && characters.get(j).y - characters.get(j).height / 2 < tile.y + tile.size) {
+                    if (characters.get(j).y < tile.y) {
+                        characters.get(j).onGround = true;
+                        characters.get(j).y = tile.y - characters.get(j).height / 2;
+                        characters.get(j).speed *= -.1f;
+                    } else if (characters.get(j).y > tile.y + tile.size) {
+                        characters.get(j).y = tile.y + tile.size + characters.get(j).height / 2;
+                        characters.get(j).speed = 0;
+                    } else if (characters.get(j).x < tile.x) {
+                        characters.get(j).x = tile.x - characters.get(j).width / 2;
+                        characters.get(j).speed = 0;
+                    } else if (characters.get(j).x > tile.x) {
+                        characters.get(j).x = tile.x + tile.size + characters.get(j).width / 2;
+                        characters.get(j).speed = 0;
+                    }
                 }
-                else if (killerMLG.y > tile.y + tile.size) {
-                    killerMLG.y=tile.y+tile.size+killerMLG.height/2;
-                    killerMLG.speed=0;
-                }
-                else if (killerMLG.x < tile.x) {
-                    killerMLG.x=tile.x-killerMLG.width/2;
-                    killerMLG.speed=0;
-                }
-                else if (killerMLG.x > tile.x) {
-                    killerMLG.x=tile.x+tile.size+killerMLG.width/2;
-                    killerMLG.speed=0;
+            }
+        }
+    }
+
+    void killBots() {
+        for (int i = 0; i < bullets.size(); i++) {
+            for (int j = 0; j < bots.size(); j++) {
+                if (bots.get(j).x - bots.get(j).width / 2 < bullets.get(i).x + bullets.get(i).size / 2 && bots.get(j).x + bots.get(j).width / 2 > bullets.get(i).x - bullets.get(i).size / 2 && bots.get(j).y - bots.get(j).height / 2 < bullets.get(i).y + bullets.get(i).size / 2 && bots.get(j).y + bots.get(j).height / 2 > bullets.get(i).y - bullets.get(i).size / 2) {
+                    bots.remove(0);
                 }
             }
         }

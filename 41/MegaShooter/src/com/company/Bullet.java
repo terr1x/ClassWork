@@ -5,21 +5,22 @@ import processing.core.PApplet;
 public class Bullet {
     float x;
     float y;
+    float size = 5;
 
     String way;
 
     PApplet parent;
 
     Bullet(float x, float y, String way, PApplet p) {
+        parent = p;
         this.x = x;
         this.y = y;
         this.way = way;
-        parent = p;
     }
 
     void draw() {
         parent.fill(0);
-        parent.ellipse(x, y, 5, 5);
+        parent.ellipse(x, y, size, size);
     }
 
     void move() {

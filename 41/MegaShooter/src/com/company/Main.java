@@ -26,12 +26,10 @@ public class Main extends PApplet {
 
     public void keyPressed() {
         if (key == 'd') {
-            world.killerMLG.x = world.killerMLG.x + 6;
-            world.killerMLG.way = KillerMLG.right;
+            world.killerMLG.moveRight();
         }
         if (key == 'a') {
-            world.killerMLG.x = world.killerMLG.x - 6;
-            world.killerMLG.way = KillerMLG.left;
+            world.killerMLG.moveLeft();
         }
         if (key == ' ') {
             world.killerMLG.jump();

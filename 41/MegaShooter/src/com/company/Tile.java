@@ -7,7 +7,7 @@ public class Tile {
     float x;
     float y;
 
-    int size = 64;
+    static int size = 32;
 
     PImage skin;
 

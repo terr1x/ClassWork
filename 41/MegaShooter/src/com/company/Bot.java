@@ -8,4 +8,9 @@ public class Bot extends Character {
     Bot(float x, float y, String appearance, PApplet p) {
         super(x, y, appearance, p);
     }
+
+    void move(){
+        way=left;
+        x=x-1;
+    }
 }

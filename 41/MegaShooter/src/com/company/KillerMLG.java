@@ -15,11 +15,21 @@ public class KillerMLG extends Character {
         }
     }
 
+    void moveRight() {
+        x = x + 6;
+        way = right;
+    }
+
+    void moveLeft() {
+        x = x - 6;
+        way = left;
+    }
+
     Bullet createBullet() {
         if (way == right) {
-            return new Bullet(x+40, y - 24, way, parent);
-        }else {
-            return new Bullet(x-40, y - 24, way, parent);
+            return new Bullet(x + 40, y - 24, way, parent);
+        } else {
+            return new Bullet(x - 40, y - 24, way, parent);
         }
     }
 }

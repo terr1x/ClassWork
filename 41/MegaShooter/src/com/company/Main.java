@@ -2,8 +2,11 @@ package com.company;
 
 import processing.core.PApplet;
 
+import java.util.HashMap;
+
 public class Main extends PApplet {
     World world;
+    HashMap<java.lang.Character, Boolean> keys = new HashMap<>();
 
     public static void main(String[] args) {
         PApplet.main(Main.class);
@@ -21,19 +24,31 @@ public class Main extends PApplet {
     public void draw() {
         background(192, 197, 206);
         world.draw();
+        handleKeys();
     }
 
-
-    public void keyPressed() {
-        if (key == 'd') {
+    private void handleKeys() {
+        if (isKeyPressed('d')) {
             world.killerMLG.moveRight();
         }
-        if (key == 'a') {
+        if (isKeyPressed('a')) {
             world.killerMLG.moveLeft();
         }
-        if (key == ' ') {
+        if (isKeyPressed(' ')) {
             world.killerMLG.jump();
         }
+    }
+
+    private boolean isKeyPressed(char key) {
+        return keys.containsKey(key) && keys.get(key);
+    }
+
+    public void keyPressed() {
+        keys.put(key, true);
+    }
+
+    public void keyReleased() {
+        keys.put(key, false);
     }
 
     public void mousePressed() {

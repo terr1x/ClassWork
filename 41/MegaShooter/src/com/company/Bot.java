@@ -11,6 +11,6 @@ public class Bot extends Character {
 
     void move(){
         way=left;
-        x=x-1;
+        x=x-3;
     }
 }

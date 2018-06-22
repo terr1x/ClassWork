@@ -52,6 +52,10 @@ public class Main extends PApplet {
     }
 
     public void mousePressed() {
-        world.bullets.add(world.killerMLG.createBullet());
+        world.killerMLG.isShooting = true;
+    }
+
+    public void mouseReleased() {
+        world.killerMLG.isShooting = false;
     }
 }

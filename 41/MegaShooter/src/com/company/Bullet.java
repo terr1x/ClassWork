@@ -5,7 +5,9 @@ import processing.core.PApplet;
 public class Bullet {
     float x;
     float y;
-    float size = 5;
+    float size = 3;
+
+    float ySpeed;
 
     String way;
 
@@ -16,6 +18,7 @@ public class Bullet {
         this.x = x;
         this.y = y;
         this.way = way;
+        ySpeed=parent.random(-1,1);
     }
 
     void draw() {
@@ -25,10 +28,11 @@ public class Bullet {
 
     void move() {
         if (way == KillerMLG.right) {
-            x = x + 10;
+            x = x + 20;
         } else {
-            x = x - 10;
+            x = x - 20;
         }
+        y=y+ySpeed;
     }
 }
 

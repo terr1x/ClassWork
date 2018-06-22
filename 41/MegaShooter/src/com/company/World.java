@@ -19,18 +19,17 @@ public class World {
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-
     };
 
     Tile[][] tileGrid = new Tile[22][32];
@@ -42,8 +41,6 @@ public class World {
 
     KillerMLG killerMLG;
 
-    ArrayList<Bullet> bullets;
-
     ArrayList<Bot> bots;
 
     ArrayList<Character> characters;
@@ -51,11 +48,10 @@ public class World {
     World(PApplet p) {
         parent = p;
         this.killerMLG = new KillerMLG(50, 50, "soldier.png", parent);
-        this.bullets = new ArrayList<>();
         this.bots = new ArrayList<>();
         this.characters = new ArrayList<>();
         characters.add(killerMLG);
-        bots.add(new Bot(400, 200, "enemy.png", parent));
+        bots.add(new Bot(1100, 200, "enemy.png", parent));
         characters.addAll(bots);
         background = parent.loadImage("background.png");
         tiles[0] = parent.loadImage("Прозрачный тайл.png");
@@ -83,6 +79,7 @@ public class World {
         applyCollision();
 
         killerMLG.draw();
+        killerMLG.shoot();
 
         for (Character character : characters) {
             character.update();
@@ -92,9 +89,9 @@ public class World {
             bots.get(i).move();
         }
 
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).draw();
-            bullets.get(i).move();
+        for (int i = 0; i < killerMLG.bullets.size(); i++) {
+            killerMLG.bullets.get(i).draw();
+            killerMLG.bullets.get(i).move();
         }
     }
 
@@ -129,9 +126,9 @@ public class World {
     }
 
     void killBots() {
-        for (int i = 0; i < bullets.size(); i++) {
+        for (Bullet bullet : killerMLG.bullets) {
             for (int j = 0; j < bots.size(); j++) {
-                if (bots.get(j).x - bots.get(j).width / 2 < bullets.get(i).x + bullets.get(i).size / 2 && bots.get(j).x + bots.get(j).width / 2 > bullets.get(i).x - bullets.get(i).size / 2 && bots.get(j).y - bots.get(j).height / 2 < bullets.get(i).y + bullets.get(i).size / 2 && bots.get(j).y + bots.get(j).height / 2 > bullets.get(i).y - bullets.get(i).size / 2) {
+                if (bots.get(j).x - bots.get(j).width / 2 < bullet.x + bullet.size / 2 && bots.get(j).x + bots.get(j).width / 2 > bullet.x - bullet.size / 2 && bots.get(j).y - bots.get(j).height / 2 < bullet.y + bullet.size / 2 && bots.get(j).y + bots.get(j).height / 2 > bullet.y - bullet.size / 2) {
                     bots.remove(0);
                 }
             }

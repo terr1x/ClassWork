@@ -1,12 +1,20 @@
 package com.company;
 
 import processing.core.PApplet;
-import processing.core.PImage;
+
+import java.util.ArrayList;
 
 public class KillerMLG extends Character {
 
+    boolean isShooting = false;
+
+
+    ArrayList<Bullet> bullets;
+
+
     KillerMLG(float x, float y, String appearance, PApplet p) {
         super(x, y, appearance, p);
+        this.bullets = new ArrayList<>();
     }
 
     void jump() {
@@ -30,6 +38,12 @@ public class KillerMLG extends Character {
             return new Bullet(x + 40, y - 24, way, parent);
         } else {
             return new Bullet(x - 40, y - 24, way, parent);
+        }
+    }
+
+    void shoot() {
+        if (isShooting == true) {
+            bullets.add(createBullet());
         }
     }
 }

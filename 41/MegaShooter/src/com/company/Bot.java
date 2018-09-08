@@ -1,9 +1,9 @@
 package com.company;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 public class Bot extends Character {
+    int health=10;
 
     Bot(float x, float y, String appearance, PApplet p) {
         super(x, y, appearance, p);
@@ -11,6 +11,10 @@ public class Bot extends Character {
 
     void move(){
         way=left;
-        x=x-3;
+        x=x-7f;
+    }
+
+    void takeDamage(){
+        health=health-1;
     }
 }

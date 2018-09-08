@@ -31,7 +31,7 @@ public class Character {
 
     void update() {
         y = y + speed;
-        speed = speed + 0.1f;
+        speed = speed + 0.3f;
     }
 
     void draw() {

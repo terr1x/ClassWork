@@ -19,7 +19,7 @@ public class KillerMLG extends Character {
 
     void jump() {
         if (onGround == true) {
-            speed = -6.4f;
+            speed = -11f;
         }
     }
 

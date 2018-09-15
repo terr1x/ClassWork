@@ -10,6 +10,9 @@ public class Character {
     float width;
     float height;
 
+    int health=200;
+
+
     boolean onGround = false;
 
     static String right = "right";
@@ -49,5 +52,9 @@ public class Character {
             parent.image(skin, 0, 0);
             parent.popMatrix();
         }
+    }
+
+    void takeDamage(int damage){
+        health=health-damage;
     }
 }

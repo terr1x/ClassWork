@@ -19,7 +19,7 @@ public class World {
             {0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
     Tile[][] tileGrid = new Tile[22][32];
@@ -31,6 +31,8 @@ public class World {
 
     KillerMLG killerMLG;
 
+    HealthBar healthBar;
+
     ArrayList<Bot> bots;
 
     ArrayList<Character> characters;
@@ -40,7 +42,9 @@ public class World {
 
     World(PApplet p) {
         parent = p;
-        this.killerMLG = new KillerMLG(50, 600, "soldier.png", parent);
+        parent.noStroke();
+        this.killerMLG = new KillerMLG(500, 600, "soldier.png", parent);
+        this.healthBar = new HealthBar(parent);
         this.bots = new ArrayList<>();
         this.characters = new ArrayList<>();
         characters.add(killerMLG);
@@ -62,19 +66,24 @@ public class World {
 
     void draw() {
         time = time + 1;
-        if (time >= 50) {
+        if (time >= 200) {
             Bot bot = new Bot(1000, 200, "enemy.png", parent);
             bots.add(bot);
             characters.add(bot);
             time = 0;
         }
+
         parent.imageMode(parent.CORNERS);
         parent.image(background, 0, 0);
+
+        parent.pushMatrix();
+        parent.translate(-killerMLG.x + 500, 0);
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 tileGrid[i][j].draw();
             }
         }
+
         applyCollision();
 
         killerMLG.draw();
@@ -92,10 +101,16 @@ public class World {
             killerMLG.bullets.get(i).draw();
             killerMLG.bullets.get(i).move();
         }
+
+        parent.popMatrix();
+
+        healthBar.draw(killerMLG.health);
     }
 
     void applyCollision() {
         killBots();
+
+        collideWithBots();
 
         for (Character character : characters) {
             character.onGround = false;
@@ -128,16 +143,25 @@ public class World {
         for (int i = 0; i < killerMLG.bullets.size(); i++) {
             Bullet bullet = killerMLG.bullets.get(i);
             for (int j = 0; j < bots.size(); j++) {
-                if (bots.get(j).x - bots.get(j).width / 2 < bullet.x + bullet.size / 2 && bots.get(j).x + bots.get(j).width / 2 > bullet.x - bullet.size / 2 && bots.get(j).y - bots.get(j).height / 2 < bullet.y + bullet.size / 2 && bots.get(j).y + bots.get(j).height / 2 > bullet.y - bullet.size / 2) {
-                    bots.get(j).takeDamage();
+                Bot bot = bots.get(j);
+                if (bot.x - bot.width / 2 < bullet.x + bullet.size / 2 && bot.x + bot.width / 2 > bullet.x - bullet.size / 2 && bot.y - bot.height / 2 < bullet.y + bullet.size / 2 && bot.y + bot.height / 2 > bullet.y - bullet.size / 2) {
+                    bot.takeDamage(killerMLG.damage);
                     killerMLG.bullets.remove(i);
                     i = i - 1;
-                    if (bots.get(j).health <= 0) {
+                    if (bot.health <= 0) {
                         bots.remove(j);
-                        j = j - 1;
                     }
                     break;
                 }
+            }
+        }
+    }
+
+    void collideWithBots() {
+        for (int i = 0; i < bots.size(); i++) {
+            Bot bot = bots.get(i);
+            if (bot.x > killerMLG.x - killerMLG.width / 2 && bot.x < killerMLG.x + killerMLG.width / 2 && bot.y > killerMLG.y - killerMLG.height / 2 && bot.y < killerMLG.y + killerMLG.height / 2) {
+                killerMLG.takeDamage(bot.damage);
             }
         }
     }

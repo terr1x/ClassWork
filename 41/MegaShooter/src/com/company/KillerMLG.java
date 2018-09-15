@@ -8,13 +8,14 @@ public class KillerMLG extends Character {
 
     boolean isShooting = false;
 
+    int damage=5;
 
     ArrayList<Bullet> bullets;
-
 
     KillerMLG(float x, float y, String appearance, PApplet p) {
         super(x, y, appearance, p);
         this.bullets = new ArrayList<>();
+        health=100;
     }
 
     void jump() {

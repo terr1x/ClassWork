@@ -45,13 +45,16 @@ public class Main extends PApplet {
 
     public void draw() {
         time = time + 1;
-        background(66, 22, 96);
 
         if (screen == GAME) {
             game();
         } else if (screen == GAME_OVER) {
             gameOver();
         }
+    }
+
+    void game(){
+        background(66, 22, 96);
 
         if (apples.size() < 4) {
             apples.add(new Apple((int) random(35) * 20, (int) random(35) * 20, this));
@@ -67,6 +70,14 @@ public class Main extends PApplet {
         for (int i = 0; i < blocks.size(); i++) {
             blocks.get(i).draw();
         }
+    }
+
+    void gameOver(){
+        background(50, 50, 50);
+        textSize(40);
+        text("GAME OVER | ◯ ‸ ◯ |",190,290);
+        textSize(23);
+        text("press 'r' to restart",230,350);
     }
 
     public void keyPressed() {

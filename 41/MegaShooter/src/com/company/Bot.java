@@ -11,7 +11,21 @@ public class Bot extends Character {
     }
 
     void move(){
-        way=left;
-        x=x-7f;
+        if(way==left) {
+            x = x - 7f;
+        }
+        if(way==right){
+            x=x+7f;
+        }
     }
+
+    void invertWay(){
+        if(way==right){
+            way=left;
+        }else if(way==left){
+            way=right;
+        }
+    }
+
+
 }

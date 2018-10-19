@@ -10,14 +10,15 @@ public class Character {
     float width;
     float height;
 
-    int health=200;
+    int health = 200;
 
 
     boolean onGround = false;
+    boolean isWhite = false;
 
     static String right = "right";
     static String left = "left";
-    String way = right;
+    String way = left;
 
     PImage skin;
 
@@ -39,22 +40,29 @@ public class Character {
 
     void draw() {
         parent.imageMode(parent.CENTER);
+        parent.pushMatrix();
+        parent.translate(x, y);
         if (way == right) {
-            parent.pushMatrix();
-            parent.translate(x, y);
             parent.scale(2.5f, 2.5f);
-            parent.image(skin, 0, 0);
-            parent.popMatrix();
         } else {
-            parent.pushMatrix();
-            parent.translate(x, y);
             parent.scale(-2.5f, 2.5f);
-            parent.image(skin, 0, 0);
-            parent.popMatrix();
         }
+        if (isWhite == true) {
+            PImage whiteClone = skin.copy();
+            whiteClone.filter(parent.THRESHOLD, 0);
+            parent.image(whiteClone, 0, 0);
+        } else {
+            parent.image(skin, 0, 0);
+        }
+        parent.popMatrix();
+        isWhite = false;
     }
 
-    void takeDamage(int damage){
-        health=health-damage;
+    void takeDamage(int damage) {
+        health = health - damage;
+    }
+
+    void makeWhite() {
+        isWhite = true;
     }
 }

@@ -15,6 +15,11 @@ public class Main extends PApplet {
     static String left = "left";
     static String right = "right";
 
+    String GAME = "game";
+    String GAME_OVER = "gameOver";
+
+    String screen = GAME;
+
     ArrayList<Block> blocks;
     Snake snake;
     ArrayList<Apple> apples;
@@ -41,6 +46,12 @@ public class Main extends PApplet {
     public void draw() {
         time = time + 1;
         background(66, 22, 96);
+
+        if (screen == GAME) {
+            game();
+        } else if (screen == GAME_OVER) {
+            gameOver();
+        }
 
         if (apples.size() < 4) {
             apples.add(new Apple((int) random(35) * 20, (int) random(35) * 20, this));

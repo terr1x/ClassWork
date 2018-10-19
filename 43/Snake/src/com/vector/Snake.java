@@ -11,7 +11,7 @@ public class Snake {
 
     ArrayList<Apple> apples;
 
-    String side;
+    String side=right;
 
     private PApplet parent;
 
@@ -22,34 +22,42 @@ public class Snake {
     }
 
     void moveUp() {
-        if (time >= 15) {
-            blocks.remove(0);
-            blocks.add(new Block(blocks.get(blocks.size() - 1).x, blocks.get(blocks.size() - 1).y - 20, parent));
-            time = 0;
+        if(side!=down) {
+            if (time >= 15) {
+                blocks.remove(0);
+                blocks.add(new Block(blocks.get(blocks.size() - 1).x, blocks.get(blocks.size() - 1).y - 20, parent));
+                time = 0;
+            }
         }
     }
 
     void moveDown() {
-        if (time >= 15) {
-            blocks.remove(0);
-            blocks.add(new Block(blocks.get(blocks.size() - 1).x, blocks.get(blocks.size() - 1).y + 20, parent));
-            time = 0;
+        if(side!=up) {
+            if (time >= 15) {
+                blocks.remove(0);
+                blocks.add(new Block(blocks.get(blocks.size() - 1).x, blocks.get(blocks.size() - 1).y + 20, parent));
+                time = 0;
+            }
         }
     }
 
     void moveRight() {
-        if (time >= 15) {
-            blocks.remove(0);
-            blocks.add(new Block(blocks.get(blocks.size() - 1).x + 20, blocks.get(blocks.size() - 1).y, parent));
-            time = 0;
+        if(side!=left) {
+            if (time >= 15) {
+                blocks.remove(0);
+                blocks.add(new Block(blocks.get(blocks.size() - 1).x + 20, blocks.get(blocks.size() - 1).y, parent));
+                time = 0;
+            }
         }
     }
 
     void moveLeft() {
-        if (time >= 15) {
-            blocks.remove(0);
-            blocks.add(new Block(blocks.get(blocks.size() - 1).x - 20, blocks.get(blocks.size() - 1).y, parent));
-            time = 0;
+        if(side!=right) {
+            if (time >= 15) {
+                blocks.remove(0);
+                blocks.add(new Block(blocks.get(blocks.size() - 1).x - 20, blocks.get(blocks.size() - 1).y, parent));
+                time = 0;
+            }
         }
     }
 

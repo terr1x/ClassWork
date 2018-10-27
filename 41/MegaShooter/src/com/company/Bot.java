@@ -27,5 +27,12 @@ public class Bot extends Character {
         }
     }
 
-
+    void pushAway(String way){
+        if(way==left) {
+            x = x - 4f;
+        }
+        if(way==right){
+            x=x+4f;
+        }
+    }
 }

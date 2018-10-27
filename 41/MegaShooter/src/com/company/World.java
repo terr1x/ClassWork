@@ -150,11 +150,12 @@ public class World {
                 if (bot.x - bot.width / 2 < bullet.x + bullet.size / 2 && bot.x + bot.width / 2 > bullet.x - bullet.size / 2 && bot.y - bot.height / 2 < bullet.y + bullet.size / 2 && bot.y + bot.height / 2 > bullet.y - bullet.size / 2) {
                     bot.takeDamage(killerMLG.damage);
                     killerMLG.bullets.remove(i);
-                    i = i - 1;
+                    bot.pushAway(killerMLG.way);
                     bot.makeWhite();
                     if (bot.health <= 0) {
                         bots.remove(j);
                     }
+                    i = i - 1;
                     break;
                 }
             }

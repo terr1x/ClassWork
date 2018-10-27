@@ -53,7 +53,7 @@ public class Main extends PApplet {
         }
     }
 
-    void game(){
+    void game() {
         background(66, 22, 96);
 
         if (apples.size() < 4) {
@@ -70,14 +70,42 @@ public class Main extends PApplet {
         for (int i = 0; i < blocks.size(); i++) {
             blocks.get(i).draw();
         }
+
+        collision();
     }
 
-    void gameOver(){
+    void gameOver() {
         background(50, 50, 50);
         textSize(40);
-        text("GAME OVER | ◯ ‸ ◯ |",190,290);
+        text("GAME OVER | ◯ ‸ ◯ |", 190, 290);
         textSize(23);
-        text("press 'r' to restart",230,350);
+        text("press 'r' to restart", 230, 350);
+
+        if(key=='r'){
+            restart();
+            screen=GAME;
+        }
+    }
+
+    void collision() {
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks.get(i).x < 0 || blocks.get(i).x > 0 && blocks.get(i).y < 0 || blocks.get(i).y > 0) {
+                screen = GAME_OVER;
+            }
+        }
+        for (int i = 0; i < blocks.size()-1; i++) {
+            if(blocks.get(i).x > blocks.get(i+1).x || blocks.get(i).x < blocks.get(i+1).x && blocks.get(i).y > blocks.get(i+1).y || blocks.get(i).y < blocks.get(i+1).y){
+                screen=GAME_OVER;
+            }
+        }
+    }
+
+    void restart(){
+        for(int i=0;i<blocks.size();i++){
+        blocks.remove(i);
+        }
+
+        snake.reset();
     }
 
     public void keyPressed() {

@@ -15,6 +15,7 @@ public class Character {
 
     boolean onGround = false;
     boolean isWhite = false;
+    boolean wasWhite = false;
 
     static String right = "right";
     static String left = "left";
@@ -63,6 +64,12 @@ public class Character {
     }
 
     void makeWhite() {
-        isWhite = true;
+        if (wasWhite == false) {
+            isWhite = true;
+            wasWhite = true;
+        } else {
+            isWhite = false;
+            wasWhite = false;
+        }
     }
 }

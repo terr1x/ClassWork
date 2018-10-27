@@ -99,4 +99,9 @@ public class Snake {
             }
         }
     }
+
+    void reset(){
+        blocks.add(new Block(0, 0, parent));
+        blocks.add(new Block(20, 0, parent));
+    }
 }

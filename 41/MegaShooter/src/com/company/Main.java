@@ -18,6 +18,7 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+        //frameRate(2);
         world = new World(this);
     }
 

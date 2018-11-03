@@ -6,7 +6,7 @@ public class Bot extends Character {
 
     int damage=1;
 
-    Bot(float x, float y, String appearance, PApplet p) {
+    Bot(float x, float y, String[] appearance, PApplet p) {
         super(x, y, appearance, p);
     }
 

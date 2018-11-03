@@ -3,6 +3,8 @@ package com.company;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.util.ArrayList;
+
 public class Character {
     float x;
     float y;
@@ -21,17 +23,22 @@ public class Character {
     static String left = "left";
     String way = left;
 
-    PImage skin;
-
     PApplet parent;
 
-    Character(float x, float y, String appearance, PApplet p) {
+    Animation animation;
+
+    Character(float x, float y, String[] appearance, PApplet p) {
         parent = p;
         this.x = x;
         this.y = y;
-        this.skin = parent.loadImage(appearance);
-        this.width = skin.width * 2.5f;
-        this.height = skin.height * 2.5f;
+        ArrayList<PImage> skins=new ArrayList<>();
+        for (int i=0;i<appearance.length;i++) {
+            skins.add(parent.loadImage(appearance[i]));
+        }
+        this.width = skins.get(0).width * 2.5f;
+        this.height = skins.get(0).height * 2.5f;
+
+        animation = new Animation(skins);
     }
 
     void update() {
@@ -49,11 +56,11 @@ public class Character {
             parent.scale(-2.5f, 2.5f);
         }
         if (isWhite == true) {
-            PImage whiteClone = skin.copy();
+            PImage whiteClone = animation.frame.copy();
             whiteClone.filter(parent.THRESHOLD, 0);
             parent.image(whiteClone, 0, 0);
         } else {
-            parent.image(skin, 0, 0);
+            parent.image(animation.frame, 0, 0);
         }
         parent.popMatrix();
         isWhite = false;

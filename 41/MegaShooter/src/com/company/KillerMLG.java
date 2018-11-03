@@ -12,7 +12,7 @@ public class KillerMLG extends Character {
 
     ArrayList<Bullet> bullets;
 
-    KillerMLG(float x, float y, String appearance, PApplet p) {
+    KillerMLG(float x, float y, String[] appearance, PApplet p) {
         super(x, y, appearance, p);
         this.bullets = new ArrayList<>();
         health=100;

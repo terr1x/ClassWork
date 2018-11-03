@@ -80,49 +80,59 @@ public class Main extends PApplet {
         text("GAME OVER | ◯ ‸ ◯ |", 190, 290);
         textSize(23);
         text("press 'r' to restart", 230, 350);
-
-        if(key=='r'){
-            restart();
-            screen=GAME;
-        }
     }
 
     void collision() {
         for (int i = 0; i < blocks.size(); i++) {
-            if (blocks.get(i).x < 0 || blocks.get(i).x > 0 && blocks.get(i).y < 0 || blocks.get(i).y > 0) {
+            if (blocks.get(i).x < 0 || blocks.get(i).x > width - 20 || blocks.get(i).y < 0 || blocks.get(i).y > height - 20) {
                 screen = GAME_OVER;
             }
         }
-        for (int i = 0; i < blocks.size()-1; i++) {
-            if(blocks.get(i).x > blocks.get(i+1).x || blocks.get(i).x < blocks.get(i+1).x && blocks.get(i).y > blocks.get(i+1).y || blocks.get(i).y < blocks.get(i+1).y){
-                screen=GAME_OVER;
+        for (int i = 0; i < blocks.size() - 1; i++) {
+            if (blocks.get(blocks.size() - 1).x == blocks.get(i).x && blocks.get(blocks.size() - 1).y == blocks.get(i).y) {
+                screen = GAME_OVER;
             }
         }
     }
 
-    void restart(){
-        for(int i=0;i<blocks.size();i++){
-        blocks.remove(i);
-        }
+    void restart() {
+        blocks.clear();
 
         snake.reset();
+
+        snake.side = right;
     }
 
     public void keyPressed() {
         if (key == 'w') {
-            snake.side = up;
+            if (snake.side != down) {
+                snake.side = up;
+            }
         }
 
         if (key == 's') {
-            snake.side = down;
+            if (snake.side != up) {
+                snake.side = down;
+            }
         }
 
         if (key == 'a') {
-            snake.side = left;
+            if (snake.side != right) {
+                snake.side = left;
+            }
         }
 
         if (key == 'd') {
-            snake.side = right;
+            if (snake.side != left) {
+                snake.side = right;
+            }
+        }
+
+        if (screen == GAME_OVER) {
+            if (key == 'r') {
+                restart();
+                screen = GAME;
+            }
         }
     }
 

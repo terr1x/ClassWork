@@ -43,7 +43,7 @@ public class World {
     World(PApplet p) {
         parent = p;
         parent.noStroke();
-        this.killerMLG = new KillerMLG(500, 600, "soldier.png", parent);
+        this.killerMLG = new KillerMLG(500, 600, new String[]{"стояние.png","движение.png"}, parent);
         this.healthBar = new HealthBar(parent);
         this.bots = new ArrayList<>();
         this.characters = new ArrayList<>();
@@ -67,7 +67,7 @@ public class World {
     void draw() {
         time = time + 1;
         if (time >= 200) {
-            Bot bot = new Bot(1000, 200, "enemy.png", parent);
+            Bot bot = new Bot(1000, 200, new String[]{"enemy.png"}, parent);
             bots.add(bot);
             characters.add(bot);
             time = 0;

@@ -31,9 +31,11 @@ public class Main extends PApplet {
     private void handleKeys() {
         if (isKeyPressed('d')) {
             world.killerMLG.moveRight();
+            world.killerMLG.isMoving=true;
         }
         if (isKeyPressed('a')) {
             world.killerMLG.moveLeft();
+            world.killerMLG.isMoving=true;
         }
         if (isKeyPressed(' ')) {
             world.killerMLG.jump();

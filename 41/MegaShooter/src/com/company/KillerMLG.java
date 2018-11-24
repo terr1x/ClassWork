@@ -7,20 +7,31 @@ import java.util.ArrayList;
 public class KillerMLG extends Character {
 
     boolean isShooting = false;
+    boolean isMoving = false;
 
-    int damage=5;
+    int damage = 100;
 
     ArrayList<Bullet> bullets;
 
     KillerMLG(float x, float y, String[] appearance, PApplet p) {
         super(x, y, appearance, p);
         this.bullets = new ArrayList<>();
-        health=100;
+        health = 100;
+    }
+
+    void draw() {
+        super.draw();
+        if (!onGround) {
+            animation.stop(1);
+        } else if (!isMoving) {
+            animation.stop(0);
+        }
     }
 
     void jump() {
-        if (onGround == true) {
+        if (onGround) {
             speed = -11f;
+            y--;
         }
     }
 
@@ -43,7 +54,7 @@ public class KillerMLG extends Character {
     }
 
     void shoot() {
-        if (isShooting == true) {
+        if (isShooting) {
             bullets.add(createBullet());
         }
     }

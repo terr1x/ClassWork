@@ -35,8 +35,8 @@ public class Character {
         for (int i=0;i<appearance.length;i++) {
             skins.add(parent.loadImage(appearance[i]));
         }
-        this.width = skins.get(0).width * 2.5f;
-        this.height = skins.get(0).height * 2.5f;
+        this.width = 32 * 2.5f;
+        this.height = 37 * 2.5f;
 
         animation = new Animation(skins);
     }
@@ -55,7 +55,7 @@ public class Character {
         } else {
             parent.scale(-2.5f, 2.5f);
         }
-        if (isWhite == true) {
+        if (isWhite) {
             PImage whiteClone = animation.frame.copy();
             whiteClone.filter(parent.THRESHOLD, 0);
             parent.image(whiteClone, 0, 0);
@@ -64,6 +64,8 @@ public class Character {
         }
         parent.popMatrix();
         isWhite = false;
+
+        animation.update();
     }
 
     void takeDamage(int damage) {
@@ -71,7 +73,7 @@ public class Character {
     }
 
     void makeWhite() {
-        if (wasWhite == false) {
+        if (!wasWhite) {
             isWhite = true;
             wasWhite = true;
         } else {

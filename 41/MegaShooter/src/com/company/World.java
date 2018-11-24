@@ -22,7 +22,7 @@ public class World {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
-    Tile[][] tileGrid = new Tile[22][32];
+    Tile[][] tileGrid = new Tile[grid.length][32];
     PImage[] tiles = new PImage[3];
 
     PImage background;
@@ -130,7 +130,7 @@ public class World {
                     } else {
                         if (character.y < ground.y) {
                             character.onGround = true;
-                            character.y = ground.y - character.height / 2;
+                            character.y = ground.y - character.height / 2+1;
                             character.speed *= -.1f;
                         } else {
                             character.y = ground.y + Tile.size + character.height / 2;

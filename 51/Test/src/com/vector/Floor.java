@@ -6,41 +6,36 @@ import org.jbox2d.dynamics.Body;
 import org.jbox2d.dynamics.BodyDef;
 import org.jbox2d.dynamics.BodyType;
 import org.jbox2d.dynamics.FixtureDef;
-import processing.core.PApplet;
 import shiffman.box2d.Box2DProcessing;
 
-public class Box {
-    int size = 20;
+public class Floor {
+    Body body;
+
     int x;
     int y;
 
-    Body body;
+    int width;
+    int height;
 
-    PApplet parent;
-
-    Box(int x, int y, PApplet p, Box2DProcessing box2D) {
-        parent = p;
-        this.x = x;
-        this.y = y;
+    Floor(int x,int y,int width,int height,Box2DProcessing box2D){
+        this.x=x;
+        this.y=y;
+        this.width=width;
+        this.height=height;
 
         BodyDef bd = new BodyDef();
         bd.position.set(box2D.coordPixelsToWorld(x,y));
-        bd.type = BodyType.DYNAMIC;
+        bd.type = BodyType.STATIC;
         body = box2D.createBody(bd);
         body.setLinearVelocity(new Vec2(0, 0));
 
         PolygonShape ps = new PolygonShape();
-        float size = box2D.scalarPixelsToWorld(20);
-        ps.setAsBox(size / 2, size / 2);
+        ps.setAsBox(box2D.scalarPixelsToWorld(width/2),box2D.scalarPixelsToWorld(height/2 ));
 
         FixtureDef fd = new FixtureDef();
         fd.shape = ps;
         fd.density = 7800;
-        fd.restitution = 0.5f;
+        fd.restitution = 0;
         body.createFixture(fd);
-    }
-
-    void draw() {
-        parent.rect(x, y, size, size);
     }
 }

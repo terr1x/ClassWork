@@ -9,8 +9,8 @@ import org.jbox2d.dynamics.FixtureDef;
 import processing.core.PApplet;
 import shiffman.box2d.Box2DProcessing;
 
-public class Box {
-    int size = 20;
+public class Doll {
+    int size = 100;
     int x;
     int y;
 
@@ -18,7 +18,7 @@ public class Box {
 
     PApplet parent;
 
-    Box(int x, int y, PApplet p, Box2DProcessing box2D) {
+    Doll(int x, int y, PApplet p, Box2DProcessing box2D) {
         parent = p;
         this.x = x;
         this.y = y;
@@ -30,13 +30,13 @@ public class Box {
         body.setLinearVelocity(new Vec2(0, 0));
 
         PolygonShape ps = new PolygonShape();
-        float size = box2D.scalarPixelsToWorld(20);
+        float size = box2D.scalarPixelsToWorld(100);
         ps.setAsBox(size / 2, size / 2);
 
         FixtureDef fd = new FixtureDef();
         fd.shape = ps;
-        fd.density = 7800;
-        fd.restitution = 0.5f;
+        fd.density = 20000;
+        fd.restitution = 0;
         body.createFixture(fd);
     }
 

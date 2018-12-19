@@ -1,48 +1,43 @@
 package com.vector;
 
 import org.jbox2d.callbacks.DebugDraw;
-import org.jbox2d.collision.shapes.PolygonShape;
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.Body;
-import org.jbox2d.dynamics.BodyDef;
-import org.jbox2d.dynamics.BodyType;
-import org.jbox2d.dynamics.FixtureDef;
+
 import processing.core.PApplet;
 
 import shiffman.box2d.Box2DProcessing;
 
+import java.util.ArrayList;
+
 public class Main extends PApplet {
 
     Box2DProcessing box2D;
+
+    ArrayList<Box> boxes = new ArrayList<>();
+
+    Floor floor;
+
+    Doll doll;
+
+    Bazooka bazooka;
 
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
 
     public void settings() {
-        size(600, 600);
-
+        size(1900, 1000);
     }
 
     public void setup() {
         box2D = new Box2DProcessing(this);
+
         box2D.createWorld();
 
-        BodyDef bd = new BodyDef();
-        bd.position.set(0, 0);
-        bd.type = BodyType.DYNAMIC;
-        Body body = box2D.createBody(bd);
-        body.setLinearVelocity(new Vec2(0, 19));
+        floor = new Floor(width / 2, height - 100, 1920, 30, box2D);
 
-        PolygonShape ps = new PolygonShape();
-        float size = box2D.scalarPixelsToWorld(50);
-        ps.setAsBox(size / 2, size / 2);
+        doll = new Doll(0, 0, this, box2D);
 
-        FixtureDef fd = new FixtureDef();
-        fd.shape = ps;
-        fd.density = 7800;
-        fd.restitution = 0.5f;
-        body.createFixture(fd);
+        bazooka = new Bazooka(this,box2D,doll,100,30);
 
         Box2dDebugDraw debugDraw = new Box2dDebugDraw();
         debugDraw.box2d = box2D;
@@ -60,5 +55,35 @@ public class Main extends PApplet {
 
         colorMode(RGB, 1, 1, 1);
         box2D.world.drawDebugData();
+
+        if (mousePressed) {
+            boxes.add(new Box(mouseX, mouseY, this, box2D));
+        }
+
+        if (keyPressed) {
+            if (key == 'w') {
+                doll.body.setAwake(true);
+                doll.body.m_linearVelocity.y = 20;
+            }
+
+            if (key == 's') {
+                doll.body.setAwake(true);
+                doll.body.m_linearVelocity.y = -20;
+            }
+
+            if (key == 'a') {
+                doll.body.setAwake(true);
+                doll.body.m_linearVelocity.x = -20;
+            }
+
+            if (key == 'd') {
+                doll.body.setAwake(true);
+                doll.body.m_linearVelocity.x = 20;
+            }
+        }
+
+        bazooka.draw();
     }
 }
+
+

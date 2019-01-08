@@ -2,6 +2,7 @@ package com.vector;
 
 import org.jbox2d.callbacks.DebugDraw;
 
+import org.jbox2d.common.Vec2;
 import processing.core.PApplet;
 
 import shiffman.box2d.Box2DProcessing;
@@ -37,7 +38,7 @@ public class Main extends PApplet {
 
         doll = new Doll(0, 0, this, box2D);
 
-        bazooka = new Bazooka(this,box2D,doll,100,30);
+        bazooka = new Bazooka(this, box2D, doll, 100, 30);
 
         Box2dDebugDraw debugDraw = new Box2dDebugDraw();
         debugDraw.box2d = box2D;
@@ -57,7 +58,10 @@ public class Main extends PApplet {
         box2D.world.drawDebugData();
 
         if (mousePressed) {
-            boxes.add(new Box(mouseX, mouseY, this, box2D));
+            if (mouseButton == RIGHT) {
+                boxes.add(new Box(mouseX, mouseY, this, box2D));
+            }
+
         }
 
         if (keyPressed) {
@@ -83,6 +87,15 @@ public class Main extends PApplet {
         }
 
         bazooka.draw();
+    }
+
+    @Override
+    public void mousePressed() {
+        if (mouseButton == LEFT) {
+            Box box = new Box(bazooka.muzzleX, bazooka.muzzleY, this, box2D);
+            box.body.applyForce(box2D.coordPixelsToWorld(bazooka.muzzleX - bazooka.x, bazooka.muzzleY - bazooka.y), box.body.getWorldCenter());
+            boxes.add(box);
+        }
     }
 }
 

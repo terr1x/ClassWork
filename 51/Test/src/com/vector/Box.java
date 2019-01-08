@@ -11,14 +11,14 @@ import shiffman.box2d.Box2DProcessing;
 
 public class Box {
     int size = 20;
-    int x;
-    int y;
+    float x;
+    float y;
 
     Body body;
 
     PApplet parent;
 
-    Box(int x, int y, PApplet p, Box2DProcessing box2D) {
+    Box(float x, float y, PApplet p, Box2DProcessing box2D) {
         parent = p;
         this.x = x;
         this.y = y;
@@ -27,7 +27,7 @@ public class Box {
         bd.position.set(box2D.coordPixelsToWorld(x,y));
         bd.type = BodyType.DYNAMIC;
         body = box2D.createBody(bd);
-        body.setLinearVelocity(new Vec2(0, 0));
+        //body.setLinearVelocity(new Vec2(0, 0));
 
         PolygonShape ps = new PolygonShape();
         float size = box2D.scalarPixelsToWorld(20);

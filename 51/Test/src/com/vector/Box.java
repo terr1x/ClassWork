@@ -24,10 +24,9 @@ public class Box {
         this.y = y;
 
         BodyDef bd = new BodyDef();
-        bd.position.set(box2D.coordPixelsToWorld(x,y));
+        bd.position.set(box2D.coordPixelsToWorld(x, y));
         bd.type = BodyType.DYNAMIC;
         body = box2D.createBody(bd);
-        //body.setLinearVelocity(new Vec2(0, 0));
 
         PolygonShape ps = new PolygonShape();
         float size = box2D.scalarPixelsToWorld(20);
@@ -35,7 +34,6 @@ public class Box {
 
         FixtureDef fd = new FixtureDef();
         fd.shape = ps;
-        fd.density = 7800;
         fd.restitution = 0.5f;
         body.createFixture(fd);
     }

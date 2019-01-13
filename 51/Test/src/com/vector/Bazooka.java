@@ -10,6 +10,8 @@ public class Bazooka {
 
     Doll doll;
 
+    double angle;
+
     float x;
     float y;
 
@@ -33,10 +35,10 @@ public class Bazooka {
     void draw() {
         x = box2D.coordWorldToPixelsPVector(doll.body.getPosition()).x;
         y = box2D.coordWorldToPixelsPVector(doll.body.getPosition()).y;
-        double angle = Math.atan2(parent.mouseY - y, parent.mouseX - x);
+        angle = Math.atan2(parent.mouseY - y, parent.mouseX - x);
 
-        muzzleX = x + width * (float)Math.cos(angle);
-        muzzleY = y + width * (float)Math.sin(angle);
+        muzzleX = x + width * (float) Math.cos(angle);
+        muzzleY = y + width * (float) Math.sin(angle);
 
         parent.pushMatrix();
         parent.translate(x, y);

@@ -67,22 +67,22 @@ public class Main extends PApplet {
         if (keyPressed) {
             if (key == 'w') {
                 doll.body.setAwake(true);
-                doll.body.m_linearVelocity.y = 20;
+                doll.body.m_linearVelocity.y = 200;
             }
 
             if (key == 's') {
                 doll.body.setAwake(true);
-                doll.body.m_linearVelocity.y = -20;
+                doll.body.m_linearVelocity.y = -200;
             }
 
             if (key == 'a') {
                 doll.body.setAwake(true);
-                doll.body.m_linearVelocity.x = -20;
+                doll.body.m_linearVelocity.x = -200;
             }
 
             if (key == 'd') {
                 doll.body.setAwake(true);
-                doll.body.m_linearVelocity.x = 20;
+                doll.body.m_linearVelocity.x = 200;
             }
         }
 
@@ -93,7 +93,8 @@ public class Main extends PApplet {
     public void mousePressed() {
         if (mouseButton == LEFT) {
             Box box = new Box(bazooka.muzzleX, bazooka.muzzleY, this, box2D);
-            box.body.applyForce(box2D.coordPixelsToWorld(bazooka.muzzleX - bazooka.x, bazooka.muzzleY - bazooka.y), box.body.getWorldCenter());
+            Vec2 direction = new Vec2(cos((float) -bazooka.angle), sin((float) -bazooka.angle)).mul(100);
+            box.body.applyLinearImpulse(direction.add(doll.body.getLinearVelocity()), box.body.getWorldCenter(), true);
             boxes.add(box);
         }
     }

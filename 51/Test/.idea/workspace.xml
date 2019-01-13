@@ -15,8 +15,8 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+            <state relative-caret-position="632">
+              <caret line="95" column="103" selection-start-line="95" selection-start-column="103" selection-end-line="95" selection-end-column="103" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -27,8 +27,8 @@
       <file leaf-file-name="Box2dDebugDraw.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Box2dDebugDraw.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            <state relative-caret-position="-816">
+              <caret column="19" selection-start-column="19" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -36,12 +36,10 @@
       <file leaf-file-name="Box.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Box.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+            <state relative-caret-position="344">
+              <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1075#1076#0" expanded="true" />
-                <element signature="e#1120#1121#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,8 +48,8 @@
       <file leaf-file-name="Bazooka.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Bazooka.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="310">
+              <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -62,8 +60,8 @@
       <file leaf-file-name="Doll.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Doll.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+            <state relative-caret-position="442">
+              <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1069#1070#0" expanded="true" />
@@ -76,7 +74,7 @@
       <file leaf-file-name="Floor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/vector/Floor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
+            <state relative-caret-position="425">
               <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -100,11 +98,11 @@
         <option value="$PROJECT_DIR$/src/com/vector/Box2dDebugDraw.java" />
         <option value="$PROJECT_DIR$/src/com/Floor.java" />
         <option value="$PROJECT_DIR$/src/com/vector/doll.java" />
-        <option value="$PROJECT_DIR$/src/com/vector/Floor.java" />
         <option value="$PROJECT_DIR$/src/com/vector/Bazooooooooka.java" />
         <option value="$PROJECT_DIR$/src/com/vector/Bazo0ka.java" />
-        <option value="$PROJECT_DIR$/src/com/vector/Doll.java" />
         <option value="$PROJECT_DIR$/src/com/vector/Bazooka.java" />
+        <option value="$PROJECT_DIR$/src/com/vector/Doll.java" />
+        <option value="$PROJECT_DIR$/src/com/vector/Floor.java" />
         <option value="$PROJECT_DIR$/src/com/vector/Box.java" />
         <option value="$PROJECT_DIR$/src/com/vector/Main.java" />
       </list>
@@ -120,6 +118,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -143,7 +142,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -231,7 +229,6 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08541667" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -240,6 +237,7 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39978212" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
       <window_info anchor="right" id="Database" order="5" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -255,18 +253,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/vector/Doll.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1069#1070#0" expanded="true" />
-            <element signature="e#1114#1115#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vector/Floor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -293,8 +279,6 @@
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -347,8 +331,6 @@
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -401,8 +383,6 @@
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -455,8 +435,6 @@
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -506,8 +484,6 @@
           <caret line="40" column="5" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -557,8 +533,6 @@
           <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -618,8 +592,6 @@
           <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -650,8 +622,6 @@
           <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -679,8 +649,6 @@
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -701,8 +669,6 @@
           <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -714,16 +680,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://J:/processing-3.3.6/core/library/core.jar!/processing/core/PApplet.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="588" selection-start-line="588" selection-end-line="588" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vector/Floor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
+        <state relative-caret-position="425">
           <caret line="37" column="26" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -731,10 +690,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://J:/processing-3.3.6/core/library/core.jar!/processing/core/PApplet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="1701" column="44" selection-start-line="1701" selection-start-column="44" selection-end-line="1701" selection-end-column="44" />
+          <folding>
+            <element signature="e#51527#51528#0" expanded="true" />
+            <element signature="e#51580#51581#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vector/Box2dDebugDraw.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-816">
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vector/Bazooka.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="40" column="51" selection-start-line="40" selection-start-column="51" selection-end-line="40" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/vector/Box.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/Libraries/jbox2d-library-2.2.1-ds.jar!/org/jbox2d/common/Vec2.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="52" column="33" selection-start-line="52" selection-start-column="33" selection-end-line="52" selection-end-column="33" />
+          <folding>
+            <element signature="e#1046#1047#0" expanded="true" />
+            <element signature="e#1101#1102#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vector/Doll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+        <state relative-caret-position="442">
+          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1069#1070#0" expanded="true" />
@@ -743,39 +751,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vector/Bazooka.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vector/Box2dDebugDraw.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="14" column="14" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/vector/Box.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/vector/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
+        <state relative-caret-position="632">
+          <caret line="95" column="103" selection-start-line="95" selection-start-column="103" selection-end-line="95" selection-end-column="103" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

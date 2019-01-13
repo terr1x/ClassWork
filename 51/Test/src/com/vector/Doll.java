@@ -24,7 +24,7 @@ public class Doll {
         this.y = y;
 
         BodyDef bd = new BodyDef();
-        bd.position.set(box2D.coordPixelsToWorld(x,y));
+        bd.position.set(box2D.coordPixelsToWorld(x, y));
         bd.type = BodyType.DYNAMIC;
         body = box2D.createBody(bd);
         body.setLinearVelocity(new Vec2(0, 0));

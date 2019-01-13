@@ -17,20 +17,20 @@ public class Floor {
     int width;
     int height;
 
-    Floor(int x,int y,int width,int height,Box2DProcessing box2D){
-        this.x=x;
-        this.y=y;
-        this.width=width;
-        this.height=height;
+    Floor(int x, int y, int width, int height, Box2DProcessing box2D) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
 
         BodyDef bd = new BodyDef();
-        bd.position.set(box2D.coordPixelsToWorld(x,y));
+        bd.position.set(box2D.coordPixelsToWorld(x, y));
         bd.type = BodyType.STATIC;
         body = box2D.createBody(bd);
         body.setLinearVelocity(new Vec2(0, 0));
 
         PolygonShape ps = new PolygonShape();
-        ps.setAsBox(box2D.scalarPixelsToWorld(width/2),box2D.scalarPixelsToWorld(height/2 ));
+        ps.setAsBox(box2D.scalarPixelsToWorld(width / 2), box2D.scalarPixelsToWorld(height / 2));
 
         FixtureDef fd = new FixtureDef();
         fd.shape = ps;

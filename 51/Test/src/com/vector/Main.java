@@ -3,6 +3,8 @@ package com.vector;
 import org.jbox2d.callbacks.DebugDraw;
 
 import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.Body;
+import org.jbox2d.dynamics.contacts.Contact;
 import processing.core.PApplet;
 
 import shiffman.box2d.Box2DProcessing;
@@ -21,6 +23,10 @@ public class Main extends PApplet {
 
     Bazooka bazooka;
 
+    Vec2 explosionPoint;
+
+    Body bullet;
+
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
@@ -33,6 +39,7 @@ public class Main extends PApplet {
         box2D = new Box2DProcessing(this);
 
         box2D.createWorld();
+        box2D.listenForCollisions();
 
         floor = new Floor(width / 2, height - 100, 1920, 30, box2D);
 
@@ -87,6 +94,12 @@ public class Main extends PApplet {
         }
 
         bazooka.draw();
+
+        if (explosionPoint != null) {
+            bullet.getWorld().destroyBody(bullet);
+            new Explosion(60, box2D, explosionPoint);
+            explosionPoint = null;
+        }
     }
 
     @Override
@@ -95,7 +108,21 @@ public class Main extends PApplet {
             Box box = new Box(bazooka.muzzleX, bazooka.muzzleY, this, box2D);
             Vec2 direction = new Vec2(cos((float) -bazooka.angle), sin((float) -bazooka.angle)).mul(100);
             box.body.applyLinearImpulse(direction.add(doll.body.getLinearVelocity()), box.body.getWorldCenter(), true);
+            box.body.setUserData("bullet");
             boxes.add(box);
+        }
+    }
+
+    public void beginContact(Contact cp) {
+        Body a = cp.getFixtureA().getBody();
+        Body b = cp.getFixtureB().getBody();
+        if (a.getUserData() == "bullet") {
+            explosionPoint = a.getPosition();
+            bullet = a;
+        }
+        if (b.getUserData() == "bullet") {
+            explosionPoint = b.getPosition();
+            bullet = b;
         }
     }
 }

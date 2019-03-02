@@ -26,6 +26,8 @@ public class Doll {
         BodyDef bd = new BodyDef();
         bd.position.set(box2D.coordPixelsToWorld(x, y));
         bd.type = BodyType.DYNAMIC;
+        bd.fixedRotation=true;
+
         body = box2D.createBody(bd);
         body.setLinearVelocity(new Vec2(0, 0));
 
@@ -37,6 +39,7 @@ public class Doll {
         fd.shape = ps;
         fd.density = 20000;
         fd.restitution = 0;
+        fd.friction=5;
         body.createFixture(fd);
     }
 

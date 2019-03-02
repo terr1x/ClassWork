@@ -3,26 +3,18 @@ package com.company;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class World {
     ArrayList<Tile> grounds = new ArrayList<>();
 
-    int[][] grid = {
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-            {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-    };
+    Tile[][] tileGrid;
 
-    Tile[][] tileGrid = new Tile[grid.length][32];
     PImage[] tiles = new PImage[3];
 
     PImage background;
@@ -40,7 +32,7 @@ public class World {
 
     int time = 0;
 
-    World(PApplet p) {
+    World(PApplet p) throws IOException {
         parent = p;
         parent.noStroke();
         this.killerMLG = new KillerMLG(500, 600, new String[]{"стояние.png","движение.png"}, parent);
@@ -53,11 +45,16 @@ public class World {
         tiles[1] = parent.loadImage("ground.png");
         tiles[1].resize(64, 64);
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                Tile tile = new Tile(j * Tile.size, i * Tile.size, tiles[grid[i][j]], parent);
+        List<String> grid=Files.readAllLines(Paths.get("data/world.skiffer"));
+
+        tileGrid = new Tile[grid.size()][32];
+
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid.get(i).length(); j++) {
+                int n = java.lang.Character.getNumericValue(grid.get(i).charAt(j));
+                Tile tile = new Tile(j * Tile.size, i * Tile.size, tiles[n], parent);
                 tileGrid[i][j] = tile;
-                if (grid[i][j] == 1) {
+                if (n == 1) {
                     grounds.add(tile);
                 }
             }
@@ -78,8 +75,8 @@ public class World {
 
         parent.pushMatrix();
         parent.translate(-killerMLG.x + 500, 0);
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
+        for (int i = 0; i < tileGrid.length; i++) {
+            for (int j = 0; j < tileGrid[i].length; j++) {
                 tileGrid[i][j].draw();
             }
         }

@@ -34,6 +34,10 @@ public class Animation {
         }
     }
 
+    void play(){
+        running=true;
+    }
+
     void stop(int frameNumber){
         running=false;
         this.frameNumber=frameNumber;

@@ -9,7 +9,7 @@ public class KillerMLG extends Character {
     boolean isShooting = false;
     boolean isMoving = false;
 
-    int damage = 100;
+    int damage = 5;
 
     ArrayList<Bullet> bullets;
 
@@ -23,7 +23,9 @@ public class KillerMLG extends Character {
         super.draw();
         if (!onGround) {
             animation.stop(1);
-        } else if (!isMoving) {
+        } else if (isMoving) {
+            animation.play();
+        } else {
             animation.stop(0);
         }
     }

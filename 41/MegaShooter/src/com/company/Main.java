@@ -2,6 +2,7 @@ package com.company;
 
 import processing.core.PApplet;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Main extends PApplet {
@@ -18,8 +19,11 @@ public class Main extends PApplet {
     }
 
     public void setup() {
-        //frameRate(2);
-        world = new World(this);
+        try {
+            world = new World(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void draw() {
@@ -29,6 +33,7 @@ public class Main extends PApplet {
     }
 
     private void handleKeys() {
+        world.killerMLG.isMoving=false;
         if (isKeyPressed('d')) {
             world.killerMLG.moveRight();
             world.killerMLG.isMoving=true;

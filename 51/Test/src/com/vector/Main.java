@@ -27,12 +27,16 @@ public class Main extends PApplet {
 
     Body bullet;
 
+    ArrayList<Explosion> explosions = new ArrayList<>();
+
+    int time;
+
     public static void main(String[] args) {
         PApplet.main(Main.class);
     }
 
     public void settings() {
-        size(1900, 1000);
+        size(1920, 1000);
     }
 
     public void setup() {
@@ -52,12 +56,14 @@ public class Main extends PApplet {
         debugDraw.g = g;
 
         debugDraw.setFlags(
-                DebugDraw.e_shapeBit + DebugDraw.e_jointBit + DebugDraw.e_centerOfMassBit
+                DebugDraw.e_shapeBit + DebugDraw.e_jointBit
         );
         box2D.world.setDebugDraw(debugDraw);
     }
 
     public void draw() {
+        time = time + 1;
+
         background(0);
         box2D.step();
 
@@ -67,6 +73,15 @@ public class Main extends PApplet {
         if (mousePressed) {
             if (mouseButton == RIGHT) {
                 boxes.add(new Box(mouseX, mouseY, this, box2D));
+            }
+            if (mouseButton == LEFT && time >= 5) {
+                Box box = new Box(bazooka.muzzleX, bazooka.muzzleY, this, box2D);
+                Vec2 direction = new Vec2(cos((float) -bazooka.angle), sin((float) -bazooka.angle)).mul(100);
+                box.body.applyLinearImpulse(direction.add(doll.body.getLinearVelocity()), box.body.getWorldCenter(), true);
+                box.body.setUserData("bullet");
+                boxes.add(box);
+
+                time = 0;
             }
 
         }
@@ -97,30 +112,26 @@ public class Main extends PApplet {
 
         if (explosionPoint != null) {
             bullet.getWorld().destroyBody(bullet);
-            new Explosion(60, box2D, explosionPoint);
+            explosions.add(new Explosion(10, box2D, explosionPoint));
             explosionPoint = null;
         }
-    }
 
-    @Override
-    public void mousePressed() {
-        if (mouseButton == LEFT) {
-            Box box = new Box(bazooka.muzzleX, bazooka.muzzleY, this, box2D);
-            Vec2 direction = new Vec2(cos((float) -bazooka.angle), sin((float) -bazooka.angle)).mul(100);
-            box.body.applyLinearImpulse(direction.add(doll.body.getLinearVelocity()), box.body.getWorldCenter(), true);
-            box.body.setUserData("bullet");
-            boxes.add(box);
+        for (int i = 0; i < explosions.size(); i++) {
+            if (explosions.get(i).died()) {
+                explosions.remove(i);
+                i--;
+            }
         }
     }
 
     public void beginContact(Contact cp) {
         Body a = cp.getFixtureA().getBody();
         Body b = cp.getFixtureB().getBody();
-        if (a.getUserData() == "bullet") {
+        if (a.getUserData() == "bullet" && b.getUserData() != "particle") {
             explosionPoint = a.getPosition();
             bullet = a;
         }
-        if (b.getUserData() == "bullet") {
+        if (b.getUserData() == "bullet" && a.getUserData() != "particle") {
             explosionPoint = b.getPosition();
             bullet = b;
         }

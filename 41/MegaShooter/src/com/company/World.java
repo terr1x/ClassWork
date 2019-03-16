@@ -35,7 +35,7 @@ public class World {
     World(PApplet p) throws IOException {
         parent = p;
         parent.noStroke();
-        this.killerMLG = new KillerMLG(500, 600, new String[]{"стояние.png","движение.png"}, parent);
+        this.killerMLG = new KillerMLG(500, 600, new String[]{"стояние.png", "движение.png"}, parent);
         this.healthBar = new HealthBar(parent);
         this.bots = new ArrayList<>();
         this.characters = new ArrayList<>();
@@ -45,7 +45,7 @@ public class World {
         tiles[1] = parent.loadImage("ground.png");
         tiles[1].resize(64, 64);
 
-        List<String> grid=Files.readAllLines(Paths.get("data/world.skiffer"));
+        List<String> grid = Files.readAllLines(Paths.get("data/world.skiffer"));
 
         tileGrid = new Tile[grid.size()][32];
 
@@ -116,7 +116,7 @@ public class World {
             for (Character character : characters) {
                 if (character.x + character.width / 2 > ground.x && character.x - character.width / 2 < ground.x + Tile.size && character.y + character.height / 2 > ground.y && character.y - character.height / 2 < ground.y + Tile.size) {
                     if (PApplet.abs(ground.x + Tile.size / 2 - character.x) > PApplet.abs(ground.y + Tile.size / 2 - character.y)) {
-                        if(character instanceof Bot){
+                        if (character instanceof Bot) {
                             ((Bot) character).invertWay();
                         }
                         if (character.x < ground.x) {
@@ -127,7 +127,7 @@ public class World {
                     } else {
                         if (character.y < ground.y) {
                             character.onGround = true;
-                            character.y = ground.y - character.height / 2+1;
+                            character.y = ground.y - character.height / 2 + 1;
                             character.speed *= -.1f;
                         } else {
                             character.y = ground.y + Tile.size + character.height / 2;

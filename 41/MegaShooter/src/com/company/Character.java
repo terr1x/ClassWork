@@ -31,8 +31,8 @@ public class Character {
         parent = p;
         this.x = x;
         this.y = y;
-        ArrayList<PImage> skins=new ArrayList<>();
-        for (int i=0;i<appearance.length;i++) {
+        ArrayList<PImage> skins = new ArrayList<>();
+        for (int i = 0; i < appearance.length; i++) {
             skins.add(parent.loadImage(appearance[i]));
         }
         this.width = 32 * 2.5f;

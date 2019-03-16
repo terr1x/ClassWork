@@ -5,14 +5,14 @@ import processing.core.PImage;
 import java.util.ArrayList;
 
 public class Animation {
-    int time=0;
+    int time = 0;
 
     ArrayList<PImage> frames;
     PImage frame;
 
     int frameNumber = 0;
 
-    boolean running=true;
+    boolean running = true;
 
     Animation(ArrayList<PImage> frames) {
         this.frames = frames;
@@ -20,7 +20,7 @@ public class Animation {
     }
 
     void update() {
-        if(running) {
+        if (running) {
             time = time + 1;
             if (time > 7.5f) {
                 if (frameNumber < frames.size()) {
@@ -34,13 +34,13 @@ public class Animation {
         }
     }
 
-    void play(){
-        running=true;
+    void play() {
+        running = true;
     }
 
-    void stop(int frameNumber){
-        running=false;
-        this.frameNumber=frameNumber;
-        frame=frames.get(frameNumber);
+    void stop(int frameNumber) {
+        running = false;
+        this.frameNumber = frameNumber;
+        frame = frames.get(frameNumber);
     }
 }

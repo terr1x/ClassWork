@@ -60,4 +60,11 @@ public class KillerMLG extends Character {
             bullets.add(createBullet());
         }
     }
+
+    Boolean isDead() {
+        if (health <= 0) {
+            return true;
+        }
+        return false;
+    }
 }

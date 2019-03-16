@@ -18,7 +18,7 @@ public class Bullet {
         this.x = x;
         this.y = y;
         this.way = way;
-        ySpeed=parent.random(-1,1);
+        ySpeed = parent.random(-1, 1);
     }
 
     void draw() {
@@ -32,7 +32,7 @@ public class Bullet {
         } else {
             x = x - 20;
         }
-        y=y+ySpeed;
+        y = y + ySpeed;
     }
 }
 

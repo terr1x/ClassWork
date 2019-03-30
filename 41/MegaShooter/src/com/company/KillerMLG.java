@@ -9,7 +9,7 @@ public class KillerMLG extends Character {
     boolean isShooting = false;
     boolean isMoving = false;
 
-    int damage = 5;
+    int damage = 50;
 
     ArrayList<Bullet> bullets;
 

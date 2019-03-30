@@ -15,7 +15,7 @@ public class World {
 
     Tile[][] tileGrid;
 
-    PImage[] tiles = new PImage[3];
+    PImage[] tiles = new PImage[4];
 
     PImage background;
 
@@ -44,10 +44,12 @@ public class World {
         tiles[0] = parent.loadImage("Прозрачный тайл.png");
         tiles[1] = parent.loadImage("ground.png");
         tiles[1].resize(64, 64);
+        tiles[2] = parent.loadImage("Прозрачный тайл.png");
+        tiles[3] = parent.loadImage("Прозрачный тайл.png");
 
         List<String> grid = Files.readAllLines(Paths.get("data/world.skiffer"));
 
-        tileGrid = new Tile[grid.size()][32];
+        tileGrid = new Tile[grid.size()][grid.get(0).length()];
 
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < grid.get(i).length(); j++) {
@@ -63,7 +65,7 @@ public class World {
 
     void draw() {
         time = time + 1;
-        if (time >= 200) {
+        if (time >= 40) {
             Bot bot = new Bot(1000, 200, new String[]{"enemy.png"}, parent);
             bots.add(bot);
             characters.add(bot);

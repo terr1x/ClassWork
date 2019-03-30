@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class Bot extends Character {
 
-    int damage = 200;
+    int damage = 1;
 
     Bot(float x, float y, String[] appearance, PApplet p) {
         super(x, y, appearance, p);

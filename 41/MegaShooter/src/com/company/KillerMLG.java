@@ -16,7 +16,7 @@ public class KillerMLG extends Character {
     KillerMLG(float x, float y, String[] appearance, PApplet p) {
         super(x, y, appearance, p);
         this.bullets = new ArrayList<>();
-        health = 100;
+        health = 50;
     }
 
     void draw() {

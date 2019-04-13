@@ -5,7 +5,6 @@ import processing.core.PImage;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +12,11 @@ import java.util.List;
 public class World {
     ArrayList<Tile> grounds = new ArrayList<>();
 
+    ArrayList<Tile> portals = new ArrayList<>();
+
     Tile[][] tileGrid;
 
-    PImage[] tiles = new PImage[4];
+    PImage[] tiles = new PImage[5];
 
     PImage background;
 
@@ -46,6 +47,8 @@ public class World {
         tiles[1].resize(64, 64);
         tiles[2] = parent.loadImage("Прозрачный тайл.png");
         tiles[3] = parent.loadImage("Прозрачный тайл.png");
+        tiles[4] = parent.loadImage("portal.png");
+        tiles[4].resize(140, 140);
 
         List<String> grid = Files.readAllLines(Paths.get("data/world.skiffer"));
 
@@ -59,6 +62,10 @@ public class World {
                 if (n == 1) {
                     grounds.add(tile);
                 }
+
+                if (n == 4) {
+                    portals.add(tile);
+                }
             }
         }
     }
@@ -66,9 +73,11 @@ public class World {
     void draw() {
         time = time + 1;
         if (time >= 40) {
-            Bot bot = new Bot(1000, 200, new String[]{"enemy.png"}, parent);
-            bots.add(bot);
-            characters.add(bot);
+            for (int i = 0; i < portals.size(); i++) {
+                Bot bot = new Bot(portals.get(i).x + Tile.size / 1.5f, portals.get(i).y + Tile.size, new String[]{"enemy.png"}, parent);
+                bots.add(bot);
+                characters.add(bot);
+            }
             time = 0;
         }
 

@@ -9,14 +9,14 @@ public class KillerMLG extends Character {
     boolean isShooting = false;
     boolean isMoving = false;
 
-    int damage = 50;
+    int damage = 100;
 
     ArrayList<Bullet> bullets;
 
     KillerMLG(float x, float y, String[] appearance, PApplet p) {
-        super(x, y, appearance, p);
+        super(x, y, appearance,right, p);
         this.bullets = new ArrayList<>();
-        health = 50;
+        health = 100;
     }
 
     void draw() {

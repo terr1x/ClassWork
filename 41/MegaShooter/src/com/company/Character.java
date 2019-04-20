@@ -27,14 +27,18 @@ public class Character {
 
     Animation animation;
 
-    Character(float x, float y, String[] appearance, PApplet p) {
+    Character(float x, float y, String[] appearance,String way, PApplet p) {
         parent = p;
+
         this.x = x;
         this.y = y;
+        this.way=way;
+
         ArrayList<PImage> skins = new ArrayList<>();
         for (int i = 0; i < appearance.length; i++) {
             skins.add(parent.loadImage(appearance[i]));
         }
+
         this.width = 32 * 2.5f;
         this.height = 37 * 2.5f;
 

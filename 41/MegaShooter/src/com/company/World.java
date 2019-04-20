@@ -12,7 +12,9 @@ import java.util.List;
 public class World {
     ArrayList<Tile> grounds = new ArrayList<>();
 
-    ArrayList<Tile> portals = new ArrayList<>();
+    ArrayList<Tile> rightBots = new ArrayList<>();
+
+    ArrayList<Tile> leftBots = new ArrayList<>();
 
     Tile[][] tileGrid;
 
@@ -36,12 +38,15 @@ public class World {
     World(PApplet p) throws IOException {
         parent = p;
         parent.noStroke();
-        this.killerMLG = new KillerMLG(500, 600, new String[]{"стояние.png", "движение.png"}, parent);
+
         this.healthBar = new HealthBar(parent);
         this.bots = new ArrayList<>();
         this.characters = new ArrayList<>();
-        characters.add(killerMLG);
+
+
+
         background = parent.loadImage("background.png");
+
         tiles[0] = parent.loadImage("Прозрачный тайл.png");
         tiles[1] = parent.loadImage("ground.png");
         tiles[1].resize(64, 64);
@@ -63,8 +68,17 @@ public class World {
                     grounds.add(tile);
                 }
 
-                if (n == 4) {
-                    portals.add(tile);
+                if(n==2){
+                    leftBots.add(tile);
+                }
+
+                if (n == 3) {
+                    rightBots.add(tile);
+                }
+
+                if(n==4){
+                    this.killerMLG = new KillerMLG(tile.x, tile.y, new String[]{"стояние.png", "движение.png"}, parent);
+                    characters.add(killerMLG);
                 }
             }
         }
@@ -73,11 +87,18 @@ public class World {
     void draw() {
         time = time + 1;
         if (time >= 40) {
-            for (int i = 0; i < portals.size(); i++) {
-                Bot bot = new Bot(portals.get(i).x + Tile.size / 1.5f, portals.get(i).y + Tile.size, new String[]{"enemy.png"}, parent);
+            for (int i = 0; i < leftBots.size(); i++) {
+                Bot bot = new Bot(leftBots.get(i).x + Tile.size / 1.5f, leftBots.get(i).y + Tile.size, new String[]{"enemy.png"},Character.left, parent);
                 bots.add(bot);
                 characters.add(bot);
             }
+
+            for (int i = 0; i < rightBots.size(); i++) {
+                Bot bot = new Bot(rightBots.get(i).x + Tile.size / 1.5f, rightBots.get(i).y + Tile.size, new String[]{"enemy.png"},Character.right, parent);
+                bots.add(bot);
+                characters.add(bot);
+            }
+
             time = 0;
         }
 

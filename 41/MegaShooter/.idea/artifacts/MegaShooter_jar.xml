@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MegaShooter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MegaShooter_jar</output-path>
+    <root id="archive" name="MegaShooter.jar">
+      <element id="module-output" name="MegaShooter" />
+      <element id="extracted-dir" path="J:/processing-3.5.2/core/library/core.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

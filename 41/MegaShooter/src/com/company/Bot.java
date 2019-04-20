@@ -6,8 +6,8 @@ public class Bot extends Character {
 
     int damage = 1;
 
-    Bot(float x, float y, String[] appearance, PApplet p) {
-        super(x, y, appearance, p);
+    Bot(float x, float y, String[] appearance,String way, PApplet p) {
+        super(x, y, appearance,way, p);
     }
 
     void move() {

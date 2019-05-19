@@ -5,22 +5,35 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var vText:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val vText=findViewById<TextView>(R.id.act1_text)
+        vText=findViewById<TextView>(R.id.act1_text)
         vText.setTextColor(0xff4286f4.toInt())
         vText.setOnClickListener{
-            Log.e("tag","НАЖАТА КНОПКА!(-_-)")
             val i= Intent(this,SecondActivity::class.java)
-            startActivity(i)
+            i.putExtra("tag1", vText.text)
+            startActivityForResult(i,0)
         }
 
         Log.v("tag","Был запущен onCreate")
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(data!=null) {
+            val str=data.getStringExtra("tag2")
+
+            vText.text=str
+        }
     }
 
     override fun onStart() {

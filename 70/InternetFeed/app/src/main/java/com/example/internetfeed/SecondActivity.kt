@@ -1,8 +1,10 @@
 package com.example.internetfeed
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import kotlinx.android.synthetic.main.second_activity.*
 
 class SecondActivity:Activity() {
@@ -11,9 +13,21 @@ class SecondActivity:Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.second_activity)
 
+        val vEdit=findViewById<EditText>(R.id.act2_edit)
+
         val vButton=findViewById<Button>(R.id.act2_button)
         vButton.setOnClickListener{
+
+            val newStr=vEdit.text.toString()
+            val i= Intent()
+            i.putExtra("tag2",newStr)
+            setResult(0,i)
             finish()
         }
+
+        val str=intent.getStringExtra("tag1")
+
+
+        vEdit.setText(str)
     }
 }

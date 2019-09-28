@@ -16,24 +16,19 @@ public class Main {
     /**
      * Считеат прочность брони в зависимости от уровня
      */
+
     private static int getArmor(int level) {
         int armor;
-        if (level > 5) {
-            if (level > 20) {
-                if (level > 50) {
-                    if (level > 70) {
-                        armor = 1000;
-                    } else {
-                        armor = 900;
-                    }
-                } else {
-                    armor = 600;
-                }
-            } else {
-                armor = 400;
-            }
-        } else {
+        if (level <= 5) {
             armor = 200;
+        } else if (level <= 20) {
+            armor = 400;
+        } else if (level <= 50) {
+            armor = 600;
+        } else if (level <= 70) {
+            armor = 900;
+        } else {
+            armor = 1000;
         }
         return armor;
     }

@@ -2,15 +2,20 @@ package com.example.internetfeed
 
 import android.content.ClipDescription
 import android.content.Intent
+import android.media.Image
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
+import com.squareup.picasso.Picasso
 import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,13 +34,13 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var vText: TextView
     lateinit var vList: LinearLayout
-    lateinit var vListView: ListView
+    lateinit var vRecView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        vListView = findViewById(R.id.act1_listView)
+        vRecView = findViewById(R.id.act1_recView)
 
         val url = "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Frss.xml"
 
@@ -45,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         request = o.subscribe({
 
-            showListView(it.items)
+            showRecView(it.items)
         }, {
             Log.e("test", "", it)
         })
@@ -61,8 +66,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showListView(feedList: ArrayList<FeedItem>) {
-        vListView.adapter = Adapter(feedList)
+    fun showRecView(feedList: ArrayList<FeedItem>) {
+        vRecView.adapter = RecAdapter(feedList)
+        vRecView.layoutManager = LinearLayoutManager(this)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -107,31 +113,46 @@ class FeedItem(
     val description: String
 )
 
-class Adapter(val items: ArrayList<FeedItem>) : BaseAdapter() {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val inflater = LayoutInflater.from(parent!!.context)
+class RecAdapter(val items: ArrayList<FeedItem>) : RecyclerView.Adapter<RecHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
+        val inflater = LayoutInflater.from(parent.context)
 
-        val view = convertView ?: inflater.inflate(R.layout.list_item, parent, false)
-        val vTitle = view.findViewById<TextView>(R.id.item_title)
+        val view = inflater.inflate(R.layout.list_item, parent, false)
 
-        val item = getItem(position) as FeedItem
-
-        vTitle.text = item.title
-
-        return view
+        return RecHolder(view)
     }
 
-    override fun getItem(position: Int): Any {
-        return items[position]
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return items.size
     }
 
+    override fun onBindViewHolder(holder: RecHolder, position: Int) {
+        val item = items[position]
 
+        holder.bind(item)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
+
+}
+
+class RecHolder(view: View) : RecyclerView.ViewHolder(view) {
+    fun bind(item: FeedItem) {
+        val vTitle = itemView.findViewById<TextView>(R.id.item_title)
+        val vThumb = itemView.findViewById<ImageView>(R.id.item_thumb)
+        val vDesc = itemView.findViewById<TextView>(R.id.item_desc)
+
+        vTitle.text = item.title
+        vDesc.text = item.description
+
+        Picasso.with(vThumb.context).load(item.thumbnail).into(vThumb)
+
+        itemView.setOnClickListener{
+            val i=Intent(Intent.ACTION_VIEW)
+            i.data= Uri.parse(item.link)
+            vThumb.context.startActivity(i)
+        }
+    }
 }

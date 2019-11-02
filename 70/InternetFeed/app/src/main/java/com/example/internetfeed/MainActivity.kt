@@ -1,12 +1,9 @@
 package com.example.internetfeed
 
-import android.content.ClipDescription
 import android.content.Intent
-import android.media.Image
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -15,17 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.google.gson.Gson
-import com.squareup.picasso.Picasso
-import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.zipWith
 import io.reactivex.schedulers.Schedulers
-import org.w3c.dom.Text
-import java.lang.RuntimeException
-import java.net.HttpURLConnection
-import java.net.URL
+import io.realm.Realm
+import io.realm.RealmList
+import io.realm.RealmObject
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,33 +34,63 @@ class MainActivity : AppCompatActivity() {
 
         vRecView = findViewById(R.id.act1_recView)
 
-        val url = "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Frss.xml"
+        val url =
+            "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Frss.xml"
 
-        val o = createRequest(url).map { Gson().fromJson(it, Feed::class.java) }.subscribeOn(
+        val o = createRequest(url).map { Gson().fromJson(it, FeedAPI::class.java) }.subscribeOn(
             Schedulers.io()
         ).observeOn(AndroidSchedulers.mainThread())
 
         request = o.subscribe({
 
-            showRecView(it.items)
+            val feed = Feed(
+                it.items.mapTo(
+                    RealmList<FeedItem>(),
+                    { feedItemAPI ->
+                        FeedItem(
+                            feedItemAPI.title,
+                            feedItemAPI.link,
+                            feedItemAPI.thumbnail,
+                            feedItemAPI.description
+                        )
+                    }
+                )
+            )
+            Log.e("path", Realm.getDefaultInstance().path)
+
+            Realm.getDefaultInstance().executeTransaction { realm ->
+
+                val oldList = realm.where(Feed::class.java).findAll()
+                if (oldList.size > 0) {
+                    for (item in oldList) {
+                        item.deleteFromRealm()
+                    }
+                }
+
+                realm.copyToRealm(feed)
+
+            }
+
+            showRecView()
         }, {
             Log.e("test", "", it)
+            showRecView()
         })
     }
 
-    fun showLineralLayout(feedList: ArrayList<FeedItem>) {
-        val inflater = layoutInflater
-        for (f in feedList) {
-            val view = inflater.inflate(R.layout.list_item, vList, false)
-            val vTitle = view.findViewById<TextView>(R.id.item_title)
-            vTitle.text = f.title
-            vList.addView(view)
-        }
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
     }
 
-    fun showRecView(feedList: ArrayList<FeedItem>) {
-        vRecView.adapter = RecAdapter(feedList)
-        vRecView.layoutManager = LinearLayoutManager(this)
+    fun showRecView() {
+
+        Realm.getDefaultInstance().executeTransaction { realm ->
+            val feed = realm.where(Feed::class.java).findFirst()
+            if (feed != null) {
+                vRecView.adapter = RecAdapter(feed.items)
+                vRecView.layoutManager = LinearLayoutManager(this)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -102,18 +124,29 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-class Feed(
-    val items: ArrayList<FeedItem>
+class FeedAPI(
+    val items: ArrayList<FeedItemAPI>
 )
 
-class FeedItem(
+class FeedItemAPI(
     val title: String,
     val link: String,
     val thumbnail: String,
     val description: String
 )
 
-class RecAdapter(val items: ArrayList<FeedItem>) : RecyclerView.Adapter<RecHolder>() {
+open class Feed(
+    var items: RealmList<FeedItem> = RealmList<FeedItem>()
+) : RealmObject()
+
+open class FeedItem(
+    var title: String = "",
+    var link: String = "",
+    var thumbnail: String = "",
+    var description: String = ""
+) : RealmObject()
+
+class RecAdapter(val items: RealmList<FeedItem>) : RecyclerView.Adapter<RecHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecHolder {
         val inflater = LayoutInflater.from(parent.context)
 
@@ -129,7 +162,7 @@ class RecAdapter(val items: ArrayList<FeedItem>) : RecyclerView.Adapter<RecHolde
     override fun onBindViewHolder(holder: RecHolder, position: Int) {
         val item = items[position]
 
-        holder.bind(item)
+        holder.bind(item!!)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -147,11 +180,11 @@ class RecHolder(view: View) : RecyclerView.ViewHolder(view) {
         vTitle.text = item.title
         vDesc.text = item.description
 
-        Picasso.with(vThumb.context).load(item.thumbnail).into(vThumb)
+        //Picasso.with(vThumb.context).load(item.thumbnail).into(vThumb)
 
-        itemView.setOnClickListener{
-            val i=Intent(Intent.ACTION_VIEW)
-            i.data= Uri.parse(item.link)
+        itemView.setOnClickListener {
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(item.link)
             vThumb.context.startActivity(i)
         }
     }

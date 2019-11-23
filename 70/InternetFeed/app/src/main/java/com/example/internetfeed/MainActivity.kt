@@ -26,9 +26,34 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
 
-        this@MainActivity.supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_place, MainFragment()).commit()
+        if (savedInstanceState == null) {
+            this@MainActivity.supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_place, MainFragment()).commitAllowingStateLoss()
+        }
 
+    }
+
+    fun showArticle(url: String) {
+
+        val bundle = Bundle()
+        bundle.putString("url", url)
+        val f = SecondFragment()
+        f.arguments = bundle
+
+        val frame2=findViewById<View>(R.id.fragment_place2)
+        if(frame2!=null) {
+            frame2.visibility=View.VISIBLE
+            this@MainActivity.supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.fragment_place2, f)
+                .commitAllowingStateLoss()
+        }else{
+            this@MainActivity.supportFragmentManager
+                .beginTransaction()
+                .add(R.id.fragment_place, f)
+                .addToBackStack("main")
+                .commitAllowingStateLoss()
+        }
     }
 }
 
@@ -93,7 +118,7 @@ class RecHolder(view: View) : RecyclerView.ViewHolder(view) {
         itemView.setOnClickListener {
             val i = Intent(Intent.ACTION_VIEW)
             i.data = Uri.parse(item.link)
-            vThumb.context.startActivity(i)
+            (vThumb.context as MainActivity).showArticle(item.link)
         }
     }
 }

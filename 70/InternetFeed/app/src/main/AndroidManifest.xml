@@ -28,6 +28,8 @@
 </intent-filter>
         </activity>
         <activity android:name=".SecondActivity" />
+
+        <service android:name=".PlayService"/>
     </application>
 
 </manifest>

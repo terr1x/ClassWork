@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater!!.inflate(R.layout.activity_main, container, false)
+        val view = inflater.inflate(R.layout.activity_main, container, false)
 
         vRecView = view.findViewById(R.id.act1_recView)
 
@@ -40,7 +40,7 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val url =
-            "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.bbci.co.uk%2Fnews%2Frss.xml"
+            "https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Ffeeds.twit.tv%2Fbrickhouse.xml"
 
         val o = createRequest(url).map { Gson().fromJson(it, FeedAPI::class.java) }.subscribeOn(
             Schedulers.io()
@@ -56,7 +56,8 @@ class MainFragment : Fragment() {
                             feedItemAPI.title,
                             feedItemAPI.link,
                             feedItemAPI.thumbnail,
-                            feedItemAPI.description
+                            feedItemAPI.description,
+                            feedItemAPI.guid
                         )
                     }
                 )

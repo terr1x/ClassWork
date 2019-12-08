@@ -1,1 +1,0 @@
-Открой `CustomLinkedList`. Напиши свою версию `LinkedList`. Для этого реализуй методы `addLast()`, `addAfter()`, `get()`, `remove()`, `toArrayList()`. В комментариях к коду описано, что должны делать эти методы

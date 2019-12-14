@@ -18,9 +18,10 @@ public class Room {
 
     public int getCost() {
         int allCost = 0;
-        for (int i = 0; i < things.size(); i++) {
-            allCost = allCost + things.get(i).getPrice();
+        for (Thing thing : things.values()) {
+            allCost = allCost + thing.getPrice();
         }
+
         return allCost;
     }
 }

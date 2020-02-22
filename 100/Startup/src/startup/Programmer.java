@@ -1,5 +1,7 @@
 package startup;
 
+import java.util.Random;
+
 public class Programmer extends Employee {
     private String language;
 
@@ -21,6 +23,13 @@ public class Programmer extends Employee {
 
     @Override
     public int doWork() {
-        return 0;
+        int loc= ((int) (Math.random() * 900) +100)*getLanguage().length();
+        System.out.println("Has finished writing "+loc+" lines of code in "+getLanguage());
+        return loc;
+    }
+
+    @Override
+    public String toString(){
+        return "I'm programmer.Name: "+getName()+".Code in "+getLanguage();
     }
 }
